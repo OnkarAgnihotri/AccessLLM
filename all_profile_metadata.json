@@ -1,0 +1,2390 @@
+{
+  "ICICIBANK.NS": {
+    "symbol": "ICICIBANK.NS",
+    "sector": "Financials"
+  },
+  "KOTAKBANK.NS": {
+    "symbol": "KOTAKBANK.NS",
+    "sector": "Finance - Banks - Private Sector"
+  },
+  "HDFCBANK.NS": {
+    "symbol": "HDFCBANK.NS",
+    "sector": "Finance - Banks - Private Sector"
+  },
+  "RELIANCE.NS": {
+    "symbol": "RELIANCE.NS",
+    "sector": "Energy"
+  },
+  "HCL-INSYS.NS": {
+    "symbol": "HCL-INSYS.NS",
+    "sector": "Information Technology"
+  },
+  "SBIN.NS": {
+    "symbol": "SBIN.NS",
+    "sector": "Financials"
+  },
+  "BHARATFORG.NS": {
+    "symbol": "BHARATFORG.NS",
+    "sector": "Materials"
+  },
+  "BHARTIARTL.NS": {
+    "symbol": "BHARTIARTL.NS",
+    "sector": "Communication Services"
+  },
+  "HCLTECH.NS": {
+    "symbol": "HCLTECH.NS",
+    "sector": "Information Technology"
+  },
+  "UNITDSPR.NS": {
+    "symbol": "UNITDSPR.NS",
+    "sector": "Consumer Staples"
+  },
+  "SONACOMS.NS": {
+    "symbol": "SONACOMS.NS",
+    "sector": "Forgings"
+  },
+  "FEDERALBNK.NS": {
+    "symbol": "FEDERALBNK.NS",
+    "sector": "Financials"
+  },
+  "GODREJCP.NS": {
+    "symbol": "GODREJCP.NS",
+    "sector": "Consumer Staples"
+  },
+  "TECHM.NS": {
+    "symbol": "TECHM.NS",
+    "sector": "Information Technology"
+  },
+  "PERSISTENT.NS": {
+    "symbol": "PERSISTENT.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "HINDALCO.NS": {
+    "symbol": "HINDALCO.NS",
+    "sector": "Materials"
+  },
+  "M&MFIN.NS": {
+    "symbol": "M&MFIN.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "SBILIFE.NS": {
+    "symbol": "SBILIFE.NS",
+    "sector": "Financials"
+  },
+  "JINDALSTEL.NS": {
+    "symbol": "JINDALSTEL.NS",
+    "sector": "Materials"
+  },
+  "ATHERENERG.NS": {
+    "symbol": "ATHERENERG.NS",
+    "sector": "Auto Ancl - Batteries"
+  },
+  "LENSKART.NS": {
+    "symbol": "LENSKART.NS",
+    "sector": "Lenses/Optical Care"
+  },
+  "GRASIM.NS": {
+    "symbol": "GRASIM.NS",
+    "sector": "Materials"
+  },
+  "AXISBANK.BO": {
+    "symbol": "AXISBANK.BO",
+    "sector": "Financials"
+  },
+  "SHRIRAMFIN.NS": {
+    "symbol": "SHRIRAMFIN.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "MANKIND.NS": {
+    "symbol": "MANKIND.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "BAJAJFINSV.NS": {
+    "symbol": "BAJAJFINSV.NS",
+    "sector": "Holding Company"
+  },
+  "LT.NS": {
+    "symbol": "LT.NS",
+    "sector": "Industrials"
+  },
+  "GMRAIRPORT.NS": {
+    "symbol": "GMRAIRPORT.NS",
+    "sector": "Industrials"
+  },
+  "RADICO.NS": {
+    "symbol": "RADICO.NS",
+    "sector": "Consumer Staples"
+  },
+  "LALPATHLAB.NS": {
+    "symbol": "LALPATHLAB.NS",
+    "sector": "Health Care"
+  },
+  "ADANIENSOL.NS": {
+    "symbol": "ADANIENSOL.NS",
+    "sector": "Utilities"
+  },
+  "TATACONSUM.NS": {
+    "symbol": "TATACONSUM.NS",
+    "sector": "Consumer Staples"
+  },
+  "SRF.NS": {
+    "symbol": "SRF.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "APLAPOLLO.NS": {
+    "symbol": "APLAPOLLO.NS",
+    "sector": "Steel - Tubes/Pipes"
+  },
+  "CGPOWER.NS": {
+    "symbol": "CGPOWER.NS",
+    "sector": "Industrials"
+  },
+  "ETERNAL.NS": {
+    "symbol": "ETERNAL.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "APOLLOHOSP.NS": {
+    "symbol": "APOLLOHOSP.NS",
+    "sector": "Health Care"
+  },
+  "HINDPETRO.NS": {
+    "symbol": "HINDPETRO.NS",
+    "sector": "Energy"
+  },
+  "BAJAJ-AUTO.NS": {
+    "symbol": "BAJAJ-AUTO.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "MEESHO.NS": {
+    "symbol": "MEESHO.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "ICICIGI.NS": {
+    "symbol": "ICICIGI.NS",
+    "sector": "Financials"
+  },
+  "WELSPUNLIV.NS": {
+    "symbol": "WELSPUNLIV.NS",
+    "sector": "Materials"
+  },
+  "MARUTI.NS": {
+    "symbol": "MARUTI.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "VGUARD.NS": {
+    "symbol": "VGUARD.NS",
+    "sector": "Industrials"
+  },
+  "AUBANK.NS": {
+    "symbol": "AUBANK.NS",
+    "sector": "Financials"
+  },
+  "ATULAUTO.NS": {
+    "symbol": "ATULAUTO.NS",
+    "sector": "Materials"
+  },
+  "DMART.NS": {
+    "symbol": "DMART.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "ANGELONE.NS": {
+    "symbol": "ANGELONE.NS",
+    "sector": "Finance & Investments"
+  },
+  "ADANIPORTS.NS": {
+    "symbol": "ADANIPORTS.NS",
+    "sector": "Industrials"
+  },
+  "RRKABEL.NS": {
+    "symbol": "RRKABEL.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "TRENT.NS": {
+    "symbol": "TRENT.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "SUNPHARMA.NS": {
+    "symbol": "SUNPHARMA.NS",
+    "sector": "Health Care"
+  },
+  "SUMICHEM.NS": {
+    "symbol": "SUMICHEM.NS",
+    "sector": "Agro Chemicals/Pesticides"
+  },
+  "ASTRAL.NS": {
+    "symbol": "ASTRAL.NS",
+    "sector": "Industrials"
+  },
+  "AMAGI.NS": {
+    "symbol": "AMAGI.NS",
+    "sector": "Entertainment & Media"
+  },
+  "MFSL.NS": {
+    "symbol": "MFSL.NS",
+    "sector": "Financials"
+  },
+  "CUMMINSIND.NS": {
+    "symbol": "CUMMINSIND.NS",
+    "sector": "Industrials"
+  },
+  "SBFC.NS": {
+    "symbol": "SBFC.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "ANTHEM.NS": {
+    "symbol": "ANTHEM.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "ASIANPAINT.NS": {
+    "symbol": "ASIANPAINT.NS",
+    "sector": "Materials"
+  },
+  "LTF.NS": {
+    "symbol": "LTF.NS",
+    "sector": "Financials"
+  },
+  "CHOLAFIN.NS": {
+    "symbol": "CHOLAFIN.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "VINATIORGA.NS": {
+    "symbol": "VINATIORGA.NS",
+    "sector": "Chemicals - Organic - Benzene Based"
+  },
+  "METROPOLIS.NS": {
+    "symbol": "METROPOLIS.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "CREDITACC.NS": {
+    "symbol": "CREDITACC.NS",
+    "sector": "Financials"
+  },
+  "HAVELLS.NS": {
+    "symbol": "HAVELLS.NS",
+    "sector": "Industrials"
+  },
+  "GODIGIT.NS": {
+    "symbol": "GODIGIT.NS",
+    "sector": "Finance - Non Life Insurance"
+  },
+  "AJANTPHARM.NS": {
+    "symbol": "AJANTPHARM.NS",
+    "sector": "Health Care"
+  },
+  "SOBHA.NS": {
+    "symbol": "SOBHA.NS",
+    "sector": "Real Estate"
+  },
+  "SAILIFE.NS": {
+    "symbol": "SAILIFE.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "WHIRLPOOL.NS": {
+    "symbol": "WHIRLPOOL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "TIINDIA.NS": {
+    "symbol": "TIINDIA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "MANYAVAR.NS": {
+    "symbol": "MANYAVAR.NS",
+    "sector": "Retail - Apparel/Accessories"
+  },
+  "HARIOMPIPE.NS": {
+    "symbol": "HARIOMPIPE.NS",
+    "sector": "Materials"
+  },
+  "HONAUT.NS": {
+    "symbol": "HONAUT.NS",
+    "sector": "Information Technology"
+  },
+  "ONESOURCE.NS": {
+    "symbol": "ONESOURCE.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "HGINFRA.NS": {
+    "symbol": "HGINFRA.NS",
+    "sector": "Real Estate"
+  },
+  "HAPPYFORGE.NS": {
+    "symbol": "HAPPYFORGE.NS",
+    "sector": "Forgings"
+  },
+  "INDOMIM.NS": {
+    "symbol": "INDOMIM.NS",
+    "sector": "Engineering - General"
+  },
+  "SOLARA.NS": {
+    "symbol": "SOLARA.NS",
+    "sector": "Health Care"
+  },
+  "SKYGOLD.NS": {
+    "symbol": "SKYGOLD.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "CUB.NS": {
+    "symbol": "CUB.NS",
+    "sector": "Financials"
+  },
+  "WOCKPHARMA.NS": {
+    "symbol": "WOCKPHARMA.NS",
+    "sector": "Health Care"
+  },
+  "QPOWER.NS": {
+    "symbol": "QPOWER.NS",
+    "sector": "Power - Transmission/Equipment"
+  },
+  "CAMS.NS": {
+    "symbol": "CAMS.NS",
+    "sector": "Finance & Investments"
+  },
+  "ARVIND.NS": {
+    "symbol": "ARVIND.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "SHREEJISPG.NS": {
+    "symbol": "SHREEJISPG.NS",
+    "sector": "Shipping"
+  },
+  "STLTECH.NS": {
+    "symbol": "STLTECH.NS",
+    "sector": "Communication Services"
+  },
+  "PGEL.NS": {
+    "symbol": "PGEL.NS",
+    "sector": "Consumer Electronics"
+  },
+  "BALRAMCHIN.NS": {
+    "symbol": "BALRAMCHIN.NS",
+    "sector": "Consumer Staples"
+  },
+  "LLOYDSME.NS": {
+    "symbol": "LLOYDSME.NS",
+    "sector": "Materials"
+  },
+  "KIMS.NS": {
+    "symbol": "KIMS.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "TBOTEK.NS": {
+    "symbol": "TBOTEK.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "FIEMIND.NS": {
+    "symbol": "FIEMIND.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "ACUTAAS.NS": {
+    "symbol": "ACUTAAS.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "ERIS.NS": {
+    "symbol": "ERIS.NS",
+    "sector": "Health Care"
+  },
+  "INDIANB.NS": {
+    "symbol": "INDIANB.NS",
+    "sector": "Financials"
+  },
+  "ANANDRATHI.NS": {
+    "symbol": "ANANDRATHI.NS",
+    "sector": "Finance & Investments"
+  },
+  "TATATECH.NS": {
+    "symbol": "TATATECH.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "SIGMAADV.NS": {
+    "symbol": "SIGMAADV.NS",
+    "sector": "Information Technology"
+  },
+  "STYLAMIND.NS": {
+    "symbol": "STYLAMIND.NS",
+    "sector": "Plywood/Laminates"
+  },
+  "WEWORK.NS": {
+    "symbol": "WEWORK.NS",
+    "sector": "Services - Others"
+  },
+  "SWANDEF.NS": {
+    "symbol": "SWANDEF.NS",
+    "sector": "Ship - Docks/Breaking/Repairs"
+  },
+  "ZFCVINDIA.NS": {
+    "symbol": "ZFCVINDIA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "AEQUS.NS": {
+    "symbol": "AEQUS.NS",
+    "sector": "Engineering - General"
+  },
+  "NUVAMA.NS": {
+    "symbol": "NUVAMA.NS",
+    "sector": "Finance & Investments"
+  },
+  "CARRARO.NS": {
+    "symbol": "CARRARO.NS",
+    "sector": "Auto Ancl - Gears & Drive"
+  },
+  "ATLANTAELE.NS": {
+    "symbol": "ATLANTAELE.NS",
+    "sector": "Electric Equipment - Transformers"
+  },
+  "UJJIVANSFB.NS": {
+    "symbol": "UJJIVANSFB.NS",
+    "sector": "Finance - Banks - Private Sector"
+  },
+  "BECTORSFOOD.NS": {
+    "symbol": "BECTORSFOOD.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "VIJAYA.NS": {
+    "symbol": "VIJAYA.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "PRUDENT.NS": {
+    "symbol": "PRUDENT.NS",
+    "sector": "Finance & Investments"
+  },
+  "KNACK.NS": {
+    "symbol": "KNACK.NS",
+    "sector": "Packaging & Containers"
+  },
+  "GOODLUCK.NS": {
+    "symbol": "GOODLUCK.NS",
+    "sector": "Materials"
+  },
+  "SANATHAN.NS": {
+    "symbol": "SANATHAN.NS",
+    "sector": "Textiles - General"
+  },
+  "LASER.NS": {
+    "symbol": "LASER.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "CANHLIFE.NS": {
+    "symbol": "CANHLIFE.NS",
+    "sector": "Finance - Life Insurance"
+  },
+  "HUDCO.NS": {
+    "symbol": "HUDCO.NS",
+    "sector": "Financials"
+  },
+  "POWERINDIA.NS": {
+    "symbol": "POWERINDIA.NS",
+    "sector": "Electric Equipment - Switchgear/Circuit Breaker"
+  },
+  "GNA.NS": {
+    "symbol": "GNA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "APARINDS.NS": {
+    "symbol": "APARINDS.NS",
+    "sector": "Industrials"
+  },
+  "LUMAXTECH.NS": {
+    "symbol": "LUMAXTECH.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "TVSSRICHAK.NS": {
+    "symbol": "TVSSRICHAK.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "CEMPRO.NS": {
+    "symbol": "CEMPRO.NS",
+    "sector": "Industrials"
+  },
+  "TINNA.NS": {
+    "symbol": "TINNA.NS",
+    "sector": "Materials"
+  },
+  "TDPOWERSYS.NS": {
+    "symbol": "TDPOWERSYS.NS",
+    "sector": "Engineering - Heavy"
+  },
+  "STEELCAST.NS": {
+    "symbol": "STEELCAST.NS",
+    "sector": "Castings/Foundry"
+  },
+  "ENTERO.NS": {
+    "symbol": "ENTERO.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "THELEELA.NS": {
+    "symbol": "THELEELA.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "MCX.NS": {
+    "symbol": "MCX.NS",
+    "sector": "Exchange Platform"
+  },
+  "VTL.NS": {
+    "symbol": "VTL.NS",
+    "sector": "Textiles - Spinning - Cotton Blended"
+  },
+  "GANECOS.NS": {
+    "symbol": "GANECOS.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "THYROCARE.NS": {
+    "symbol": "THYROCARE.NS",
+    "sector": "Health Care"
+  },
+  "GUFICBIO.NS": {
+    "symbol": "GUFICBIO.NS",
+    "sector": "Health Care"
+  },
+  "JKCEMENT.NS": {
+    "symbol": "JKCEMENT.NS",
+    "sector": "Materials"
+  },
+  "HEG.NS": {
+    "symbol": "HEG.NS",
+    "sector": "Electrodes - Graphite"
+  },
+  "TITAGARH.NS": {
+    "symbol": "TITAGARH.NS",
+    "sector": "Industrials"
+  },
+  "GODAVARIBIO.NS": {
+    "symbol": "GODAVARIBIO.NS",
+    "sector": "Chemicals - Organic - Others"
+  },
+  "TURTLEMINT.NS": {
+    "symbol": "TURTLEMINT.NS",
+    "sector": "Financial Technologies (Fintech)"
+  },
+  "SCI.NS": {
+    "symbol": "SCI.NS",
+    "sector": "Industrials"
+  },
+  "JASH.NS": {
+    "symbol": "JASH.NS",
+    "sector": "Engineering - General"
+  },
+  "ZAGGLE.NS": {
+    "symbol": "ZAGGLE.NS",
+    "sector": "IT Enabled Services"
+  },
+  "VIDYAWIRES.NS": {
+    "symbol": "VIDYAWIRES.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "ETHOSLTD.NS": {
+    "symbol": "ETHOSLTD.NS",
+    "sector": "Watches"
+  },
+  "SENCO.NS": {
+    "symbol": "SENCO.NS",
+    "sector": "Gems, Jewellery & Precious Metals"
+  },
+  "FSL.NS": {
+    "symbol": "FSL.NS",
+    "sector": "Information Technology"
+  },
+  "XPROINDIA.NS": {
+    "symbol": "XPROINDIA.NS",
+    "sector": "Materials"
+  },
+  "CASTROLIND.NS": {
+    "symbol": "CASTROLIND.NS",
+    "sector": "Materials"
+  },
+  "KISSHT.NS": {
+    "symbol": "KISSHT.NS",
+    "sector": "Finance & Investments"
+  },
+  "HINDCOPPER.NS": {
+    "symbol": "HINDCOPPER.NS",
+    "sector": "Materials"
+  },
+  "LAXMIDENTL.NS": {
+    "symbol": "LAXMIDENTL.NS",
+    "sector": "Medical Equipment & Accessories"
+  },
+  "KSB.NS": {
+    "symbol": "KSB.NS",
+    "sector": "Pumps"
+  },
+  "SYRMA.NS": {
+    "symbol": "SYRMA.NS",
+    "sector": "Electronics - Equipment/Components"
+  },
+  "KSHINTL.NS": {
+    "symbol": "KSHINTL.NS",
+    "sector": "Copper/Copper Alloys Products"
+  },
+  "CLEAN.NS": {
+    "symbol": "CLEAN.NS",
+    "sector": "Chemicals - Speciality"
+  },
+  "ICICIAMC.NS": {
+    "symbol": "ICICIAMC.NS",
+    "sector": "Finance - Mutual Funds"
+  },
+  "SAIL.NS": {
+    "symbol": "SAIL.NS",
+    "sector": "Materials"
+  },
+  "CMSINFO.NS": {
+    "symbol": "CMSINFO.NS",
+    "sector": "Services - Others"
+  },
+  "EIDPARRY.NS": {
+    "symbol": "EIDPARRY.NS",
+    "sector": "Consumer Staples"
+  },
+  "ABDL.NS": {
+    "symbol": "ABDL.NS",
+    "sector": "Beverages & Distilleries"
+  },
+  "AYE.NS": {
+    "symbol": "AYE.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "NYKAA.NS": {
+    "symbol": "NYKAA.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "PIRAMALFIN.NS": {
+    "symbol": "PIRAMALFIN.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "POLICYBZR.NS": {
+    "symbol": "POLICYBZR.NS",
+    "sector": "Financial Technologies (Fintech)"
+  },
+  "GVT&D.NS": {
+    "symbol": "GVT&D.NS",
+    "sector": "Industrials"
+  },
+  "CPPLUS.NS": {
+    "symbol": "CPPLUS.NS",
+    "sector": "IT Equipments & Peripherals"
+  },
+  "JSWENERGY.NS": {
+    "symbol": "JSWENERGY.NS",
+    "sector": "Utilities"
+  },
+  "PHARMABEES.NS": {
+    "symbol": "PHARMABEES.NS",
+    "sector": "Financials"
+  },
+  "THERMAX.NS": {
+    "symbol": "THERMAX.NS",
+    "sector": "Industrials"
+  },
+  "NETWEB.NS": {
+    "symbol": "NETWEB.NS",
+    "sector": "IT Enabled Services"
+  },
+  "ABCAPITAL.NS": {
+    "symbol": "ABCAPITAL.NS",
+    "sector": "Financials"
+  },
+  "PRESTIGE.NS": {
+    "symbol": "PRESTIGE.NS",
+    "sector": "Real Estate"
+  },
+  "COCHINSHIP.NS": {
+    "symbol": "COCHINSHIP.NS",
+    "sector": "Ship - Docks/Breaking/Repairs"
+  },
+  "DATAPATTNS.NS": {
+    "symbol": "DATAPATTNS.NS",
+    "sector": "Aerospace & Defense"
+  },
+  "IPCALAB.NS": {
+    "symbol": "IPCALAB.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "GODFRYPHLP.NS": {
+    "symbol": "GODFRYPHLP.NS",
+    "sector": "Consumer Staples"
+  },
+  "LUPIN.NS": {
+    "symbol": "LUPIN.NS",
+    "sector": "Health Care"
+  },
+  "INDUSINDBK.NS": {
+    "symbol": "INDUSINDBK.NS",
+    "sector": "Financials"
+  },
+  "COFORGE.NS": {
+    "symbol": "COFORGE.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "ASHOKLEY.NS": {
+    "symbol": "ASHOKLEY.NS",
+    "sector": "Industrials"
+  },
+  "SYNGENE.NS": {
+    "symbol": "SYNGENE.NS",
+    "sector": "Health Care"
+  },
+  "ZYDUSLIFE.NS": {
+    "symbol": "ZYDUSLIFE.NS",
+    "sector": "Health Care"
+  },
+  "POLYCAB.NS": {
+    "symbol": "POLYCAB.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "NAVINFLUOR.NS": {
+    "symbol": "NAVINFLUOR.NS",
+    "sector": "Materials"
+  },
+  "KEI.NS": {
+    "symbol": "KEI.NS",
+    "sector": "Industrials"
+  },
+  "POLYMED.NS": {
+    "symbol": "POLYMED.NS",
+    "sector": "Health Care"
+  },
+  "GROWW.NS": {
+    "symbol": "GROWW.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "AVALON.NS": {
+    "symbol": "AVALON.NS",
+    "sector": "Consumer Electronics"
+  },
+  "SHADOWFAX.NS": {
+    "symbol": "SHADOWFAX.NS",
+    "sector": "Logistics - Warehousing/Supply Chain/Others"
+  },
+  "TRITURBINE.NS": {
+    "symbol": "TRITURBINE.NS",
+    "sector": "Industrials"
+  },
+  "KFINTECH.NS": {
+    "symbol": "KFINTECH.NS",
+    "sector": "Finance & Investments"
+  },
+  "KIRLOSENG.NS": {
+    "symbol": "KIRLOSENG.NS",
+    "sector": "Industrials"
+  },
+  "TVSMOTOR.NS": {
+    "symbol": "TVSMOTOR.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "JSWSTEEL.NS": {
+    "symbol": "JSWSTEEL.NS",
+    "sector": "Materials"
+  },
+  "SAFARI.NS": {
+    "symbol": "SAFARI.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BOSCH-HCIL.NS": {
+    "symbol": "BOSCH-HCIL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "CRISIL.NS": {
+    "symbol": "CRISIL.NS",
+    "sector": "Financials"
+  },
+  "IDFCFIRSTB.NS": {
+    "symbol": "IDFCFIRSTB.NS",
+    "sector": "Financials"
+  },
+  "MAZDOCK.NS": {
+    "symbol": "MAZDOCK.NS",
+    "sector": "Ship - Docks/Breaking/Repairs"
+  },
+  "MUTHOOTFIN.NS": {
+    "symbol": "MUTHOOTFIN.NS",
+    "sector": "Financials"
+  },
+  "DIXON.NS": {
+    "symbol": "DIXON.NS",
+    "sector": "Consumer Electronics"
+  },
+  "SWIGGY.NS": {
+    "symbol": "SWIGGY.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "MAXHEALTH.NS": {
+    "symbol": "MAXHEALTH.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "BIOCON.NS": {
+    "symbol": "BIOCON.NS",
+    "sector": "Health Care"
+  },
+  "BHARTIHEXA.NS": {
+    "symbol": "BHARTIHEXA.NS",
+    "sector": "Telecom Services"
+  },
+  "KAYNES.NS": {
+    "symbol": "KAYNES.NS",
+    "sector": "Electronics - Equipment/Components"
+  },
+  "ACMESOLAR.NS": {
+    "symbol": "ACMESOLAR.NS",
+    "sector": "Power - Transmission/Equipment"
+  },
+  "SUNDARMFIN.NS": {
+    "symbol": "SUNDARMFIN.NS",
+    "sector": "Financials"
+  },
+  "SCHAEFFLER.NS": {
+    "symbol": "SCHAEFFLER.NS",
+    "sector": "Bearings"
+  },
+  "ABBOTINDIA.NS": {
+    "symbol": "ABBOTINDIA.NS",
+    "sector": "Health Care"
+  },
+  "GABRIEL.NS": {
+    "symbol": "GABRIEL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "NATIONALUM.NS": {
+    "symbol": "NATIONALUM.NS",
+    "sector": "Materials"
+  },
+  "NTPCGREEN.NS": {
+    "symbol": "NTPCGREEN.NS",
+    "sector": "Power - Generation/Distribution"
+  },
+  "LAURUSLABS.NS": {
+    "symbol": "LAURUSLABS.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "KARURVYSYA.NS": {
+    "symbol": "KARURVYSYA.NS",
+    "sector": "Financials"
+  },
+  "WABAG.NS": {
+    "symbol": "WABAG.NS",
+    "sector": "Utilities"
+  },
+  "CARTRADE.NS": {
+    "symbol": "CARTRADE.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "ASTERDM.NS": {
+    "symbol": "ASTERDM.NS",
+    "sector": "Health Care"
+  },
+  "SHAILY.NS": {
+    "symbol": "SHAILY.NS",
+    "sector": "Plastics - Plastic & Plastic Products"
+  },
+  "NEULANDLAB.NS": {
+    "symbol": "NEULANDLAB.NS",
+    "sector": "Health Care"
+  },
+  "EBGNG.NS": {
+    "symbol": "EBGNG.NS",
+    "sector": "Electronics - Equipment/Components"
+  },
+  "SOLARINDS.NS": {
+    "symbol": "SOLARINDS.NS",
+    "sector": "Materials"
+  },
+  "TORNTPHARM.NS": {
+    "symbol": "TORNTPHARM.NS",
+    "sector": "Health Care"
+  },
+  "CRAFTSMAN.NS": {
+    "symbol": "CRAFTSMAN.NS",
+    "sector": "Engineering - General"
+  },
+  "PTCIL.NS": {
+    "symbol": "PTCIL.NS",
+    "sector": "Materials"
+  },
+  "AFFLE.NS": {
+    "symbol": "AFFLE.NS",
+    "sector": "Entertainment & Media"
+  },
+  "MANAPPURAM.NS": {
+    "symbol": "MANAPPURAM.NS",
+    "sector": "Financials"
+  },
+  "RBLBANK.NS": {
+    "symbol": "RBLBANK.NS",
+    "sector": "Financials"
+  },
+  "TENNIND.NS": {
+    "symbol": "TENNIND.NS",
+    "sector": "Auto Ancl - Others"
+  },
+  "ANANTRAJ.NS": {
+    "symbol": "ANANTRAJ.NS",
+    "sector": "Real Estate"
+  },
+  "JYOTICNC.NS": {
+    "symbol": "JYOTICNC.NS",
+    "sector": "Engineering - Heavy"
+  },
+  "SEDEMAC.NS": {
+    "symbol": "SEDEMAC.NS",
+    "sector": "Auto Ancl - Equipment Others"
+  },
+  "BORORENEW.NS": {
+    "symbol": "BORORENEW.NS",
+    "sector": "Health Care"
+  },
+  "VAML.NS": {
+    "symbol": "VAML.NS",
+    "sector": "Aluminium"
+  },
+  "PAYTM.NS": {
+    "symbol": "PAYTM.NS",
+    "sector": "Financial Technologies (Fintech)"
+  },
+  "KAJARIACER.NS": {
+    "symbol": "KAJARIACER.NS",
+    "sector": "Industrials"
+  },
+  "INGERRAND.NS": {
+    "symbol": "INGERRAND.NS",
+    "sector": "Industrials"
+  },
+  "BANDHANBNK.NS": {
+    "symbol": "BANDHANBNK.NS",
+    "sector": "Financials"
+  },
+  "INOXINDIA.NS": {
+    "symbol": "INOXINDIA.NS",
+    "sector": "Engineering - General"
+  },
+  "IKS.NS": {
+    "symbol": "IKS.NS",
+    "sector": "IT Enabled Services"
+  },
+  "DELHIVERY.NS": {
+    "symbol": "DELHIVERY.NS",
+    "sector": "Logistics - Warehousing/Supply Chain/Others"
+  },
+  "PARADEEP.NS": {
+    "symbol": "PARADEEP.NS",
+    "sector": "Fertilisers"
+  },
+  "CHOLAHLDNG.NS": {
+    "symbol": "CHOLAHLDNG.NS",
+    "sector": "Financials"
+  },
+  "HOMEFIRST.NS": {
+    "symbol": "HOMEFIRST.NS",
+    "sector": "Finance - Housing"
+  },
+  "SMARTWORKS.NS": {
+    "symbol": "SMARTWORKS.NS",
+    "sector": "Infrastructure - General"
+  },
+  "GRAPHITE.NS": {
+    "symbol": "GRAPHITE.NS",
+    "sector": "Industrials"
+  },
+  "BDL.NS": {
+    "symbol": "BDL.NS",
+    "sector": "Aerospace & Defense"
+  },
+  "ABREL.NS": {
+    "symbol": "ABREL.NS",
+    "sector": "Materials"
+  },
+  "BIRLACABLE.NS": {
+    "symbol": "BIRLACABLE.NS",
+    "sector": "Materials"
+  },
+  "SHAKTIPUMP.NS": {
+    "symbol": "SHAKTIPUMP.NS",
+    "sector": "Industrials"
+  },
+  "BSE.NS": {
+    "symbol": "BSE.NS",
+    "sector": "Financials"
+  },
+  "MARICO.NS": {
+    "symbol": "MARICO.NS",
+    "sector": "Consumer Staples"
+  },
+  "FORTIS.NS": {
+    "symbol": "FORTIS.NS",
+    "sector": "Health Care"
+  },
+  "UNOMINDA.NS": {
+    "symbol": "UNOMINDA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "INDHOTEL.NS": {
+    "symbol": "INDHOTEL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "PHOENIXLTD.NS": {
+    "symbol": "PHOENIXLTD.NS",
+    "sector": "Real Estate"
+  },
+  "BHEL.NS": {
+    "symbol": "BHEL.NS",
+    "sector": "Industrials"
+  },
+  "OBEROIRLTY.NS": {
+    "symbol": "OBEROIRLTY.NS",
+    "sector": "Real Estate"
+  },
+  "HDFCAMC.NS": {
+    "symbol": "HDFCAMC.NS",
+    "sector": "Financials"
+  },
+  "INDUSTOWER.NS": {
+    "symbol": "INDUSTOWER.NS",
+    "sector": "Communication Services"
+  },
+  "JSL.NS": {
+    "symbol": "JSL.NS",
+    "sector": "Materials"
+  },
+  "MRF.NS": {
+    "symbol": "MRF.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "JUBLFOOD.NS": {
+    "symbol": "JUBLFOOD.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "ENDURANCE.NS": {
+    "symbol": "ENDURANCE.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BEL.NS": {
+    "symbol": "BEL.NS",
+    "sector": "Information Technology"
+  },
+  "PAGEIND.NS": {
+    "symbol": "PAGEIND.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "LGEINDIA.NS": {
+    "symbol": "LGEINDIA.NS",
+    "sector": "Consumer Electronics"
+  },
+  "VISHAL.NS": {
+    "symbol": "VISHAL.NS",
+    "sector": "Retail - Departmental Stores"
+  },
+  "IDEA.NS": {
+    "symbol": "IDEA.NS",
+    "sector": "Communication Services"
+  },
+  "NMDC.NS": {
+    "symbol": "NMDC.NS",
+    "sector": "Materials"
+  },
+  "TORNTPOWER.NS": {
+    "symbol": "TORNTPOWER.NS",
+    "sector": "Utilities"
+  },
+  "360ONE.NS": {
+    "symbol": "360ONE.NS",
+    "sector": "Finance & Investments"
+  },
+  "EXIDEIND.NS": {
+    "symbol": "EXIDEIND.NS",
+    "sector": "Industrials"
+  },
+  "COROMANDEL.NS": {
+    "symbol": "COROMANDEL.NS",
+    "sector": "Materials"
+  },
+  "BIKAJI.NS": {
+    "symbol": "BIKAJI.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "BLUESTARCO.NS": {
+    "symbol": "BLUESTARCO.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "PNBHOUSING.NS": {
+    "symbol": "PNBHOUSING.NS",
+    "sector": "Financials"
+  },
+  "HEROMOTOCO.NS": {
+    "symbol": "HEROMOTOCO.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "OIL.NS": {
+    "symbol": "OIL.NS",
+    "sector": "Energy"
+  },
+  "CEATLTD.NS": {
+    "symbol": "CEATLTD.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "ITCHOTELS.NS": {
+    "symbol": "ITCHOTELS.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "BERGEPAINT.NS": {
+    "symbol": "BERGEPAINT.NS",
+    "sector": "Materials"
+  },
+  "SUPREMEIND.NS": {
+    "symbol": "SUPREMEIND.NS",
+    "sector": "Materials"
+  },
+  "ELECON.NS": {
+    "symbol": "ELECON.NS",
+    "sector": "Engineering - Heavy"
+  },
+  "PINELABS.NS": {
+    "symbol": "PINELABS.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "SJS.NS": {
+    "symbol": "SJS.NS",
+    "sector": "Auto Ancl - Others"
+  },
+  "SHRIPISTON.NS": {
+    "symbol": "SHRIPISTON.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "DEEPAKNTR.NS": {
+    "symbol": "DEEPAKNTR.NS",
+    "sector": "Materials"
+  },
+  "AMBER.NS": {
+    "symbol": "AMBER.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "INDIGO.NS": {
+    "symbol": "INDIGO.NS",
+    "sector": "Industrials"
+  },
+  "AGARWALEYE.NS": {
+    "symbol": "AGARWALEYE.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "MEDANTA.NS": {
+    "symbol": "MEDANTA.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "ABB.NS": {
+    "symbol": "ABB.NS",
+    "sector": "Industrials"
+  },
+  "CORONA.NS": {
+    "symbol": "CORONA.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "TIMKEN.NS": {
+    "symbol": "TIMKEN.NS",
+    "sector": "Industrials"
+  },
+  "KWIL.NS": {
+    "symbol": "KWIL.NS",
+    "sector": "Milk & Milk Products"
+  },
+  "MANIPALHOS.NS": {
+    "symbol": "MANIPALHOS.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "AETHER.NS": {
+    "symbol": "AETHER.NS",
+    "sector": "Chemicals - Speciality"
+  },
+  "BRIGADE.NS": {
+    "symbol": "BRIGADE.NS",
+    "sector": "Real Estate"
+  },
+  "BELRISE.NS": {
+    "symbol": "BELRISE.NS",
+    "sector": "Auto Parts & Accessories"
+  },
+  "JKLAKSHMI.NS": {
+    "symbol": "JKLAKSHMI.NS",
+    "sector": "Materials"
+  },
+  "SONATSOFTW.NS": {
+    "symbol": "SONATSOFTW.NS",
+    "sector": "Information Technology"
+  },
+  "CARBORUNIV.NS": {
+    "symbol": "CARBORUNIV.NS",
+    "sector": "Industrials"
+  },
+  "BANSALWIRE.NS": {
+    "symbol": "BANSALWIRE.NS",
+    "sector": "Iron & Steel"
+  },
+  "BEML.NS": {
+    "symbol": "BEML.NS",
+    "sector": "Auto - Construction Vehicles"
+  },
+  "CHALET.NS": {
+    "symbol": "CHALET.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "GAJA.NS": {
+    "symbol": "GAJA.NS",
+    "sector": "Finance & Investments"
+  },
+  "GRINDWELL.NS": {
+    "symbol": "GRINDWELL.NS",
+    "sector": "Industrials"
+  },
+  "CDSL.NS": {
+    "symbol": "CDSL.NS",
+    "sector": "Financials"
+  },
+  "FOSECOIND.NS": {
+    "symbol": "FOSECOIND.NS",
+    "sector": "Materials"
+  },
+  "ZENSARTECH.NS": {
+    "symbol": "ZENSARTECH.NS",
+    "sector": "Information Technology"
+  },
+  "EIHOTEL.NS": {
+    "symbol": "EIHOTEL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "INNOVACAP.NS": {
+    "symbol": "INNOVACAP.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "MAXESTATES.NS": {
+    "symbol": "MAXESTATES.NS",
+    "sector": "Realty"
+  },
+  "NEOGEN.NS": {
+    "symbol": "NEOGEN.NS",
+    "sector": "Chemicals - Speciality"
+  },
+  "ORCHPHARMA.NS": {
+    "symbol": "ORCHPHARMA.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "BECTORFOOD.NS": {
+    "symbol": "BECTORFOOD.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "BIRLACORPN.NS": {
+    "symbol": "BIRLACORPN.NS",
+    "sector": "Materials"
+  },
+  "MILKYMIST.NS": {
+    "symbol": "MILKYMIST.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "DIACABS.NS": {
+    "symbol": "DIACABS.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "KALYANKJIL.NS": {
+    "symbol": "KALYANKJIL.NS",
+    "sector": "Gems, Jewellery & Precious Metals"
+  },
+  "MTARTECH.NS": {
+    "symbol": "MTARTECH.NS",
+    "sector": "Aerospace & Defense"
+  },
+  "GRWRHITECH.NS": {
+    "symbol": "GRWRHITECH.NS",
+    "sector": "Materials"
+  },
+  "REDINGTON.NS": {
+    "symbol": "REDINGTON.NS",
+    "sector": "Information Technology"
+  },
+  "OLAELEC.NS": {
+    "symbol": "OLAELEC.NS",
+    "sector": "Auto - 2 & 3 Wheelers"
+  },
+  "BLUESTONE.NS": {
+    "symbol": "BLUESTONE.NS",
+    "sector": "Gems, Jewellery & Precious Metals"
+  },
+  "INFY.NS": {
+    "symbol": "INFY.NS",
+    "sector": "Information Technology"
+  },
+  "AXISBANK.NS": {
+    "symbol": "AXISBANK.NS",
+    "sector": "Financials"
+  },
+  "M&M.NS": {
+    "symbol": "M&M.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BAJFINANCE.NS": {
+    "symbol": "BAJFINANCE.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "ITC.NS": {
+    "symbol": "ITC.NS",
+    "sector": "Consumer Staples"
+  },
+  "TCS.NS": {
+    "symbol": "TCS.NS",
+    "sector": "Information Technology"
+  },
+  "TITAN.NS": {
+    "symbol": "TITAN.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "HINDUNILVR.NS": {
+    "symbol": "HINDUNILVR.NS",
+    "sector": "Consumer Staples"
+  },
+  "NTPC.NS": {
+    "symbol": "NTPC.NS",
+    "sector": "Utilities"
+  },
+  "TATASTEEL.NS": {
+    "symbol": "TATASTEEL.NS",
+    "sector": "Iron & Steel"
+  },
+  "ULTRACEMCO.NS": {
+    "symbol": "ULTRACEMCO.NS",
+    "sector": "Materials"
+  },
+  "DIVISLAB.NS": {
+    "symbol": "DIVISLAB.NS",
+    "sector": "Health Care"
+  },
+  "POWERGRID.NS": {
+    "symbol": "POWERGRID.NS",
+    "sector": "Utilities"
+  },
+  "EICHERMOT.NS": {
+    "symbol": "EICHERMOT.NS",
+    "sector": "Auto - 2 & 3 Wheelers"
+  },
+  "NESTLEIND.NS": {
+    "symbol": "NESTLEIND.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "TMCV.NS": {
+    "symbol": "TMCV.NS",
+    "sector": "Auto - LCVs/HCVs"
+  },
+  "COALINDIA.NS": {
+    "symbol": "COALINDIA.NS",
+    "sector": "Materials"
+  },
+  "HAL.NS": {
+    "symbol": "HAL.NS",
+    "sector": "Aerospace & Defense"
+  },
+  "ONGC.NS": {
+    "symbol": "ONGC.NS",
+    "sector": "Energy"
+  },
+  "ADANIPOWER.NS": {
+    "symbol": "ADANIPOWER.NS",
+    "sector": "Power - Generation/Distribution"
+  },
+  "ADANIENT.NS": {
+    "symbol": "ADANIENT.NS",
+    "sector": "Industrials"
+  },
+  "CIPLA.NS": {
+    "symbol": "CIPLA.NS",
+    "sector": "Health Care"
+  },
+  "JIOFIN.NS": {
+    "symbol": "JIOFIN.NS",
+    "sector": "Investment Company"
+  },
+  "MOTHERSON.NS": {
+    "symbol": "MOTHERSON.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "DRREDDY.NS": {
+    "symbol": "DRREDDY.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "BPCL.NS": {
+    "symbol": "BPCL.NS",
+    "sector": "Energy"
+  },
+  "TMPV.NS": {
+    "symbol": "TMPV.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BRITANNIA.NS": {
+    "symbol": "BRITANNIA.NS",
+    "sector": "Consumer Staples"
+  },
+  "HDFCLIFE.NS": {
+    "symbol": "HDFCLIFE.NS",
+    "sector": "Financials"
+  },
+  "TATAPOWER.NS": {
+    "symbol": "TATAPOWER.NS",
+    "sector": "Utilities"
+  },
+  "SUZLON.NS": {
+    "symbol": "SUZLON.NS",
+    "sector": "Industrials"
+  },
+  "VBL.NS": {
+    "symbol": "VBL.NS",
+    "sector": "Non-Alcoholic Beverages"
+  },
+  "IOC.NS": {
+    "symbol": "IOC.NS",
+    "sector": "Energy"
+  },
+  "PIDILITIND.NS": {
+    "symbol": "PIDILITIND.NS",
+    "sector": "Materials"
+  },
+  "LICI.NS": {
+    "symbol": "LICI.NS",
+    "sector": "Finance - Life Insurance"
+  },
+  "BAJAJHLDNG.NS": {
+    "symbol": "BAJAJHLDNG.NS",
+    "sector": "Financials"
+  },
+  "NAUKRI.NS": {
+    "symbol": "NAUKRI.NS",
+    "sector": "Internet & Catalogue Retail"
+  },
+  "WIPRO.NS": {
+    "symbol": "WIPRO.NS",
+    "sector": "Information Technology"
+  },
+  "GAIL.NS": {
+    "symbol": "GAIL.NS",
+    "sector": "Utilities"
+  },
+  "AUROPHARMA.NS": {
+    "symbol": "AUROPHARMA.NS",
+    "sector": "Health Care"
+  },
+  "PFC.NS": {
+    "symbol": "PFC.NS",
+    "sector": "Financials"
+  },
+  "VEDL.NS": {
+    "symbol": "VEDL.NS",
+    "sector": "Materials"
+  },
+  "BOSCHLTD.NS": {
+    "symbol": "BOSCHLTD.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BANKBARODA.NS": {
+    "symbol": "BANKBARODA.NS",
+    "sector": "Financials"
+  },
+  "DLF.NS": {
+    "symbol": "DLF.NS",
+    "sector": "Real Estate"
+  },
+  "LTM.NS": {
+    "symbol": "LTM.NS",
+    "sector": "Information Technology"
+  },
+  "CANBK.NS": {
+    "symbol": "CANBK.NS",
+    "sector": "Finance - Banks - Public Sector"
+  },
+  "PNB.NS": {
+    "symbol": "PNB.NS",
+    "sector": "Financials"
+  },
+  "YESBANK.NS": {
+    "symbol": "YESBANK.NS",
+    "sector": "Finance - Banks - Private Sector"
+  },
+  "RECLTD.NS": {
+    "symbol": "RECLTD.NS",
+    "sector": "Financials"
+  },
+  "ADANIGREEN.NS": {
+    "symbol": "ADANIGREEN.NS",
+    "sector": "Utilities"
+  },
+  "GLENMARK.NS": {
+    "symbol": "GLENMARK.NS",
+    "sector": "Health Care"
+  },
+  "UNIONBANK.NS": {
+    "symbol": "UNIONBANK.NS",
+    "sector": "Financials"
+  },
+  "SIEMENS.NS": {
+    "symbol": "SIEMENS.NS",
+    "sector": "Industrials"
+  },
+  "LODHA.NS": {
+    "symbol": "LODHA.NS",
+    "sector": "Realty"
+  },
+  "MPHASIS.NS": {
+    "symbol": "MPHASIS.NS",
+    "sector": "Information Technology"
+  },
+  "UPL.NS": {
+    "symbol": "UPL.NS",
+    "sector": "Materials"
+  },
+  "HYUNDAI.NS": {
+    "symbol": "HYUNDAI.NS",
+    "sector": "Auto - Cars & Jeeps"
+  },
+  "WELCORP.NS": {
+    "symbol": "WELCORP.NS",
+    "sector": "Materials"
+  },
+  "ALKEM.NS": {
+    "symbol": "ALKEM.NS",
+    "sector": "Health Care"
+  },
+  "VMM.NS": {
+    "symbol": "VMM.NS",
+    "sector": "Retail - Departmental Stores"
+  },
+  "OFSS.NS": {
+    "symbol": "OFSS.NS",
+    "sector": "Information Technology"
+  },
+  "SHREECEM.NS": {
+    "symbol": "SHREECEM.NS",
+    "sector": "Materials"
+  },
+  "GODREJPROP.NS": {
+    "symbol": "GODREJPROP.NS",
+    "sector": "Real Estate"
+  },
+  "VOLTAS.NS": {
+    "symbol": "VOLTAS.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "NHPC.NS": {
+    "symbol": "NHPC.NS",
+    "sector": "Utilities"
+  },
+  "HINDZINC.NS": {
+    "symbol": "HINDZINC.NS",
+    "sector": "Materials"
+  },
+  "ENRIN.NS": {
+    "symbol": "ENRIN.NS",
+    "sector": "Electric Equipment - General"
+  },
+  "HFCL.NS": {
+    "symbol": "HFCL.NS",
+    "sector": "Communication Services"
+  },
+  "WAAREEENER.NS": {
+    "symbol": "WAAREEENER.NS",
+    "sector": "Electric Equipment - General"
+  },
+  "COLPAL.NS": {
+    "symbol": "COLPAL.NS",
+    "sector": "Consumer Staples"
+  },
+  "AMBUJACEM.NS": {
+    "symbol": "AMBUJACEM.NS",
+    "sector": "Materials"
+  },
+  "PETRONET.NS": {
+    "symbol": "PETRONET.NS",
+    "sector": "Energy"
+  },
+  "GLAND.NS": {
+    "symbol": "GLAND.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "DABUR.NS": {
+    "symbol": "DABUR.NS",
+    "sector": "Consumer Staples"
+  },
+  "SBICARD.NS": {
+    "symbol": "SBICARD.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "PIIND.NS": {
+    "symbol": "PIIND.NS",
+    "sector": "Materials"
+  },
+  "FLUOROCHEM.NS": {
+    "symbol": "FLUOROCHEM.NS",
+    "sector": "Chemicals - Speciality"
+  },
+  "TATACOMM.NS": {
+    "symbol": "TATACOMM.NS",
+    "sector": "Communication Services"
+  },
+  "JSWINFRA.NS": {
+    "symbol": "JSWINFRA.NS",
+    "sector": "Port & Port Services"
+  },
+  "ICICIPRULI.NS": {
+    "symbol": "ICICIPRULI.NS",
+    "sector": "Financials"
+  },
+  "NAM-INDIA.NS": {
+    "symbol": "NAM-INDIA.NS",
+    "sector": "Financials"
+  },
+  "ATGL.NS": {
+    "symbol": "ATGL.NS",
+    "sector": "Utilities"
+  },
+  "BANKINDIA.NS": {
+    "symbol": "BANKINDIA.NS",
+    "sector": "Financials"
+  },
+  "CONCOR.NS": {
+    "symbol": "CONCOR.NS",
+    "sector": "Industrials"
+  },
+  "TATACAP.NS": {
+    "symbol": "TATACAP.NS",
+    "sector": "Finance & Investments"
+  },
+  "BALKRISIND.NS": {
+    "symbol": "BALKRISIND.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "HSCL.NS": {
+    "symbol": "HSCL.NS",
+    "sector": "Materials"
+  },
+  "MAHABANK.NS": {
+    "symbol": "MAHABANK.NS",
+    "sector": "Financials"
+  },
+  "CROMPTON.NS": {
+    "symbol": "CROMPTON.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "AEGISLOG.NS": {
+    "symbol": "AEGISLOG.NS",
+    "sector": "Energy"
+  },
+  "IIFL.NS": {
+    "symbol": "IIFL.NS",
+    "sector": "Financials"
+  },
+  "KPIL.NS": {
+    "symbol": "KPIL.NS",
+    "sector": "Utilities"
+  },
+  "LICHSGFIN.NS": {
+    "symbol": "LICHSGFIN.NS",
+    "sector": "Financials"
+  },
+  "MOTILALOFS.NS": {
+    "symbol": "MOTILALOFS.NS",
+    "sector": "Financials"
+  },
+  "POONAWALLA.NS": {
+    "symbol": "POONAWALLA.NS",
+    "sector": "Financials"
+  },
+  "AIAENG.NS": {
+    "symbol": "AIAENG.NS",
+    "sector": "Industrials"
+  },
+  "IRFC.NS": {
+    "symbol": "IRFC.NS",
+    "sector": "Finance - Term Lending Institutions"
+  },
+  "HDBFS.NS": {
+    "symbol": "HDBFS.NS",
+    "sector": "Finance & Investments"
+  },
+  "IRCTC.NS": {
+    "symbol": "IRCTC.NS",
+    "sector": "Tours & Travels"
+  },
+  "DALBHARAT.NS": {
+    "symbol": "DALBHARAT.NS",
+    "sector": "Materials"
+  },
+  "KPRMILL.NS": {
+    "symbol": "KPRMILL.NS",
+    "sector": "Textiles - Spinning - Cotton Blended"
+  },
+  "LINDEINDIA.NS": {
+    "symbol": "LINDEINDIA.NS",
+    "sector": "Materials"
+  },
+  "AIIL.NS": {
+    "symbol": "AIIL.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "NH.NS": {
+    "symbol": "NH.NS",
+    "sector": "Health Care"
+  },
+  "STARHEALTH.NS": {
+    "symbol": "STARHEALTH.NS",
+    "sector": "Finance - Non Life Insurance"
+  },
+  "PPLPHARMA.NS": {
+    "symbol": "PPLPHARMA.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "ELGIEQUIP.NS": {
+    "symbol": "ELGIEQUIP.NS",
+    "sector": "Industrials"
+  },
+  "GICRE.NS": {
+    "symbol": "GICRE.NS",
+    "sector": "Financials"
+  },
+  "APOLLOTYRE.NS": {
+    "symbol": "APOLLOTYRE.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "SAMMAANCAP.NS": {
+    "symbol": "SAMMAANCAP.NS",
+    "sector": "Financials"
+  },
+  "ASAHIINDIA.NS": {
+    "symbol": "ASAHIINDIA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "TATAELXSI.NS": {
+    "symbol": "TATAELXSI.NS",
+    "sector": "Information Technology"
+  },
+  "GLAXO.NS": {
+    "symbol": "GLAXO.NS",
+    "sector": "Health Care"
+  },
+  "GESHIP.NS": {
+    "symbol": "GESHIP.NS",
+    "sector": "Energy"
+  },
+  "RAMCOCEM.NS": {
+    "symbol": "RAMCOCEM.NS",
+    "sector": "Materials"
+  },
+  "PATANJALI.NS": {
+    "symbol": "PATANJALI.NS",
+    "sector": "Edible Oils & Solvent Extraction"
+  },
+  "GRANULES.NS": {
+    "symbol": "GRANULES.NS",
+    "sector": "Health Care"
+  },
+  "PREMIERENE.NS": {
+    "symbol": "PREMIERENE.NS",
+    "sector": "Electric Equipment - General"
+  },
+  "RVNL.NS": {
+    "symbol": "RVNL.NS",
+    "sector": "Construction, Contracting & Engineering"
+  },
+  "ARE&M.NS": {
+    "symbol": "ARE&M.NS",
+    "sector": "Industrials"
+  },
+  "ATUL.NS": {
+    "symbol": "ATUL.NS",
+    "sector": "Materials"
+  },
+  "SAGILITY.NS": {
+    "symbol": "SAGILITY.NS",
+    "sector": "IT Enabled Services"
+  },
+  "TATACHEM.NS": {
+    "symbol": "TATACHEM.NS",
+    "sector": "Materials"
+  },
+  "USHAMART.NS": {
+    "symbol": "USHAMART.NS",
+    "sector": "Materials"
+  },
+  "FIVESTAR.NS": {
+    "symbol": "FIVESTAR.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "IGL.NS": {
+    "symbol": "IGL.NS",
+    "sector": "Utilities"
+  },
+  "CGCL.NS": {
+    "symbol": "CGCL.NS",
+    "sector": "Non-Banking Financial Company (NBFC)"
+  },
+  "ESCORTS.NS": {
+    "symbol": "ESCORTS.NS",
+    "sector": "Industrials"
+  },
+  "KPITTECH.NS": {
+    "symbol": "KPITTECH.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "IEX.NS": {
+    "symbol": "IEX.NS",
+    "sector": "Utilities"
+  },
+  "UBL.NS": {
+    "symbol": "UBL.NS",
+    "sector": "Consumer Staples"
+  },
+  "FINCABLES.NS": {
+    "symbol": "FINCABLES.NS",
+    "sector": "Industrials"
+  },
+  "DEEPAKFERT.NS": {
+    "symbol": "DEEPAKFERT.NS",
+    "sector": "Materials"
+  },
+  "3MINDIA.NS": {
+    "symbol": "3MINDIA.NS",
+    "sector": "Industrials"
+  },
+  "CESC.NS": {
+    "symbol": "CESC.NS",
+    "sector": "Power - Generation/Distribution"
+  },
+  "CYIENT.NS": {
+    "symbol": "CYIENT.NS",
+    "sector": "Information Technology"
+  },
+  "LTTS.NS": {
+    "symbol": "LTTS.NS",
+    "sector": "Industrials"
+  },
+  "AWL.NS": {
+    "symbol": "AWL.NS",
+    "sector": "Edible Oils & Solvent Extraction"
+  },
+  "MSUMI.NS": {
+    "symbol": "MSUMI.NS",
+    "sector": "Cables - Power/Others"
+  },
+  "AARTIIND.NS": {
+    "symbol": "AARTIIND.NS",
+    "sector": "Materials"
+  },
+  "BAJAJHFL.NS": {
+    "symbol": "BAJAJHFL.NS",
+    "sector": "Finance - Housing"
+  },
+  "IREDA.NS": {
+    "symbol": "IREDA.NS",
+    "sector": "Finance - Term Lending Institutions"
+  },
+  "NLCINDIA.NS": {
+    "symbol": "NLCINDIA.NS",
+    "sector": "Materials"
+  },
+  "COHANCE.NS": {
+    "symbol": "COHANCE.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "IRB.NS": {
+    "symbol": "IRB.NS",
+    "sector": "Construction, Contracting & Engineering"
+  },
+  "HEXT.NS": {
+    "symbol": "HEXT.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "TATAINVEST.NS": {
+    "symbol": "TATAINVEST.NS",
+    "sector": "Finance & Investments"
+  },
+  "NATCOPHARM.NS": {
+    "symbol": "NATCOPHARM.NS",
+    "sector": "Health Care"
+  },
+  "FORCEMOT.NS": {
+    "symbol": "FORCEMOT.NS",
+    "sector": "Industrials"
+  },
+  "JPPOWER.NS": {
+    "symbol": "JPPOWER.NS",
+    "sector": "Utilities"
+  },
+  "ECLERX.NS": {
+    "symbol": "ECLERX.NS",
+    "sector": "Information Technology"
+  },
+  "JUBLPHARMA.NS": {
+    "symbol": "JUBLPHARMA.NS",
+    "sector": "Health Care"
+  },
+  "PFIZER.NS": {
+    "symbol": "PFIZER.NS",
+    "sector": "Health Care"
+  },
+  "RAINBOW.NS": {
+    "symbol": "RAINBOW.NS",
+    "sector": "Hospitals & Medical Services"
+  },
+  "EMAMILTD.NS": {
+    "symbol": "EMAMILTD.NS",
+    "sector": "Consumer Staples"
+  },
+  "NAVA.NS": {
+    "symbol": "NAVA.NS",
+    "sector": "Power - Generation/Distribution"
+  },
+  "CCL.NS": {
+    "symbol": "CCL.NS",
+    "sector": "Consumer Staples"
+  },
+  "SHYAMMETL.NS": {
+    "symbol": "SHYAMMETL.NS",
+    "sector": "Iron & Steel"
+  },
+  "APTUS.NS": {
+    "symbol": "APTUS.NS",
+    "sector": "Finance - Housing"
+  },
+  "ABSLAMC.NS": {
+    "symbol": "ABSLAMC.NS",
+    "sector": "Finance - Mutual Funds"
+  },
+  "ZENTEC.NS": {
+    "symbol": "ZENTEC.NS",
+    "sector": "Information Technology"
+  },
+  "GRSE.NS": {
+    "symbol": "GRSE.NS",
+    "sector": "Industrials"
+  },
+  "HBLENGINE.NS": {
+    "symbol": "HBLENGINE.NS",
+    "sector": "Industrials"
+  },
+  "ZEEL.NS": {
+    "symbol": "ZEEL.NS",
+    "sector": "Communication Services"
+  },
+  "RKFORGE.NS": {
+    "symbol": "RKFORGE.NS",
+    "sector": "Forgings"
+  },
+  "ACC.NS": {
+    "symbol": "ACC.NS",
+    "sector": "Materials"
+  },
+  "NBCC.NS": {
+    "symbol": "NBCC.NS",
+    "sector": "Industrials"
+  },
+  "ENGINERSIN.NS": {
+    "symbol": "ENGINERSIN.NS",
+    "sector": "Industrials"
+  },
+  "SCHNEIDER.NS": {
+    "symbol": "SCHNEIDER.NS",
+    "sector": "Industrials"
+  },
+  "PVRINOX.NS": {
+    "symbol": "PVRINOX.NS",
+    "sector": "Communication Services"
+  },
+  "JINDALSAW.NS": {
+    "symbol": "JINDALSAW.NS",
+    "sector": "Steel - Tubes/Pipes"
+  },
+  "CENTRALBK.NS": {
+    "symbol": "CENTRALBK.NS",
+    "sector": "Financials"
+  },
+  "FACT.NS": {
+    "symbol": "FACT.NS",
+    "sector": "Materials"
+  },
+  "ZYDUSWELL.NS": {
+    "symbol": "ZYDUSWELL.NS",
+    "sector": "Food Processing & Packaging"
+  },
+  "IDBI.NS": {
+    "symbol": "IDBI.NS",
+    "sector": "Financials"
+  },
+  "BAYERCROP.NS": {
+    "symbol": "BAYERCROP.NS",
+    "sector": "Materials"
+  },
+  "AADHARHFC.NS": {
+    "symbol": "AADHARHFC.NS",
+    "sector": "Finance - Housing"
+  },
+  "ABLBL.NS": {
+    "symbol": "ABLBL.NS",
+    "sector": "Retail - Apparel/Accessories"
+  },
+  "NIVABUPA.NS": {
+    "symbol": "NIVABUPA.NS",
+    "sector": "Finance - Non Life Insurance"
+  },
+  "AAVAS.NS": {
+    "symbol": "AAVAS.NS",
+    "sector": "Financials"
+  },
+  "CAPLIPOINT.NS": {
+    "symbol": "CAPLIPOINT.NS",
+    "sector": "Health Care"
+  },
+  "INDGN.NS": {
+    "symbol": "INDGN.NS",
+    "sector": "Services - Others"
+  },
+  "LTFOODS.NS": {
+    "symbol": "LTFOODS.NS",
+    "sector": "Consumer Staples"
+  },
+  "NCC.NS": {
+    "symbol": "NCC.NS",
+    "sector": "Industrials"
+  },
+  "PWL.NS": {
+    "symbol": "PWL.NS",
+    "sector": "Education - Coaching/Study Material/Others"
+  },
+  "INTELLECT.NS": {
+    "symbol": "INTELLECT.NS",
+    "sector": "Information Technology"
+  },
+  "CHAMBLFERT.NS": {
+    "symbol": "CHAMBLFERT.NS",
+    "sector": "Materials"
+  },
+  "MGL.NS": {
+    "symbol": "MGL.NS",
+    "sector": "Utilities"
+  },
+  "GPIL.NS": {
+    "symbol": "GPIL.NS",
+    "sector": "Steel - Sponge Iron"
+  },
+  "IFCI.NS": {
+    "symbol": "IFCI.NS",
+    "sector": "Financials"
+  },
+  "GILLETTE.NS": {
+    "symbol": "GILLETTE.NS",
+    "sector": "Consumer Staples"
+  },
+  "DEVYANI.NS": {
+    "symbol": "DEVYANI.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "MINDACORP.NS": {
+    "symbol": "MINDACORP.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "GRAVITA.NS": {
+    "symbol": "GRAVITA.NS",
+    "sector": "Materials"
+  },
+  "INOXWIND.NS": {
+    "symbol": "INOXWIND.NS",
+    "sector": "Industrials"
+  },
+  "CANFINHOME.NS": {
+    "symbol": "CANFINHOME.NS",
+    "sector": "Financials"
+  },
+  "CHOICEIN.NS": {
+    "symbol": "CHOICEIN.NS",
+    "sector": "Financials"
+  },
+  "J&KBANK.NS": {
+    "symbol": "J&KBANK.NS",
+    "sector": "Financials"
+  },
+  "CHENNPETRO.NS": {
+    "symbol": "CHENNPETRO.NS",
+    "sector": "Energy"
+  },
+  "HONASA.NS": {
+    "symbol": "HONASA.NS",
+    "sector": "Personal Care"
+  },
+  "RPOWER.NS": {
+    "symbol": "RPOWER.NS",
+    "sector": "Utilities"
+  },
+  "EMCURE.NS": {
+    "symbol": "EMCURE.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "SAPPHIRE.NS": {
+    "symbol": "SAPPHIRE.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "JSWDULUX.NS": {
+    "symbol": "JSWDULUX.NS",
+    "sector": "Materials"
+  },
+  "KEC.NS": {
+    "symbol": "KEC.NS",
+    "sector": "Industrials"
+  },
+  "INDIAMART.NS": {
+    "symbol": "INDIAMART.NS",
+    "sector": "Internet & Catalogue Retail"
+  },
+  "NSLNISP.NS": {
+    "symbol": "NSLNISP.NS",
+    "sector": "Iron & Steel"
+  },
+  "LEMONTREE.NS": {
+    "symbol": "LEMONTREE.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "OLECTRA.NS": {
+    "symbol": "OLECTRA.NS",
+    "sector": "Industrials"
+  },
+  "JUBLINGREA.NS": {
+    "symbol": "JUBLINGREA.NS",
+    "sector": "Agro Products"
+  },
+  "URBANCO.NS": {
+    "symbol": "URBANCO.NS",
+    "sector": "Services - Others"
+  },
+  "PCBL.NS": {
+    "symbol": "PCBL.NS",
+    "sector": "Carbon Black"
+  },
+  "SIGNATURE.NS": {
+    "symbol": "SIGNATURE.NS",
+    "sector": "Realty"
+  },
+  "GODREJIND.NS": {
+    "symbol": "GODREJIND.NS",
+    "sector": "Materials"
+  },
+  "TECHNOE.NS": {
+    "symbol": "TECHNOE.NS",
+    "sector": "Industrials"
+  },
+  "JMFINANCIL.NS": {
+    "symbol": "JMFINANCIL.NS",
+    "sector": "Financials"
+  },
+  "CIEINDIA.NS": {
+    "symbol": "CIEINDIA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "SJVN.NS": {
+    "symbol": "SJVN.NS",
+    "sector": "Utilities"
+  },
+  "BSOFT.NS": {
+    "symbol": "BSOFT.NS",
+    "sector": "Information Technology"
+  },
+  "DCMSHRIRAM.NS": {
+    "symbol": "DCMSHRIRAM.NS",
+    "sector": "Materials"
+  },
+  "SWANCORP.NS": {
+    "symbol": "SWANCORP.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "BATAINDIA.NS": {
+    "symbol": "BATAINDIA.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "AEGISVOPAK.NS": {
+    "symbol": "AEGISVOPAK.NS",
+    "sector": "Port & Port Services"
+  },
+  "IRCON.NS": {
+    "symbol": "IRCON.NS",
+    "sector": "Engineering - General"
+  },
+  "DOMS.NS": {
+    "symbol": "DOMS.NS",
+    "sector": "Printing/Publishing/Stationery"
+  },
+  "FIRSTCRY.NS": {
+    "symbol": "FIRSTCRY.NS",
+    "sector": "E-Commerce/E-Retail"
+  },
+  "EMMVEE.NS": {
+    "symbol": "EMMVEE.NS",
+    "sector": "Electric Equipment - General"
+  },
+  "AFCONS.NS": {
+    "symbol": "AFCONS.NS",
+    "sector": "Construction, Contracting & Engineering"
+  },
+  "ACE.NS": {
+    "symbol": "ACE.NS",
+    "sector": "Industrials"
+  },
+  "SARDAEN.NS": {
+    "symbol": "SARDAEN.NS",
+    "sector": "Steel - Sponge Iron"
+  },
+  "SPLPETRO.NS": {
+    "symbol": "SPLPETRO.NS",
+    "sector": "Petrochemicals - Polymers"
+  },
+  "NIACL.NS": {
+    "symbol": "NIACL.NS",
+    "sector": "Financials"
+  },
+  "SUNTV.NS": {
+    "symbol": "SUNTV.NS",
+    "sector": "Communication Services"
+  },
+  "TEJASNET.NS": {
+    "symbol": "TEJASNET.NS",
+    "sector": "Communication Services"
+  },
+  "GMDCLTD.NS": {
+    "symbol": "GMDCLTD.NS",
+    "sector": "Materials"
+  },
+  "JKTYRE.NS": {
+    "symbol": "JKTYRE.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "IOB.NS": {
+    "symbol": "IOB.NS",
+    "sector": "Financials"
+  },
+  "CONCORDBIO.NS": {
+    "symbol": "CONCORDBIO.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "ANURAS.NS": {
+    "symbol": "ANURAS.NS",
+    "sector": "Chemicals - Speciality"
+  },
+  "UTIAMC.NS": {
+    "symbol": "UTIAMC.NS",
+    "sector": "Finance - Mutual Funds"
+  },
+  "SAREGAMA.NS": {
+    "symbol": "SAREGAMA.NS",
+    "sector": "Entertainment & Media"
+  },
+  "IGIL.NS": {
+    "symbol": "IGIL.NS",
+    "sector": "Services - Others"
+  },
+  "NEWGEN.NS": {
+    "symbol": "NEWGEN.NS",
+    "sector": "Information Technology"
+  },
+  "TARIL.NS": {
+    "symbol": "TARIL.NS",
+    "sector": "Industrials"
+  },
+  "JSWCEMENT.NS": {
+    "symbol": "JSWCEMENT.NS",
+    "sector": "Cement"
+  },
+  "JWL.NS": {
+    "symbol": "JWL.NS",
+    "sector": "Industrials"
+  },
+  "NUVOCO.NS": {
+    "symbol": "NUVOCO.NS",
+    "sector": "Cement"
+  },
+  "ABFRL.NS": {
+    "symbol": "ABFRL.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "TRIDENT.NS": {
+    "symbol": "TRIDENT.NS",
+    "sector": "Textiles - Spinning - Cotton Blended"
+  },
+  "BLS.NS": {
+    "symbol": "BLS.NS",
+    "sector": "Information Technology"
+  },
+  "BLUEJET.NS": {
+    "symbol": "BLUEJET.NS",
+    "sector": "Pharmaceuticals"
+  },
+  "MRPL.NS": {
+    "symbol": "MRPL.NS",
+    "sector": "Energy"
+  },
+  "ITI.NS": {
+    "symbol": "ITI.NS",
+    "sector": "Communication Services"
+  },
+  "INDIACEM.NS": {
+    "symbol": "INDIACEM.NS",
+    "sector": "Materials"
+  },
+  "JBMA.NS": {
+    "symbol": "JBMA.NS",
+    "sector": "Auto Ancl - Others"
+  },
+  "RAILTEL.NS": {
+    "symbol": "RAILTEL.NS",
+    "sector": "Telecom Services"
+  },
+  "TRAVELFOOD.NS": {
+    "symbol": "TRAVELFOOD.NS",
+    "sector": "Hotels, Resorts & Restaurants"
+  },
+  "RHIM.NS": {
+    "symbol": "RHIM.NS",
+    "sector": "Materials"
+  },
+  "JAINREC.NS": {
+    "symbol": "JAINREC.NS",
+    "sector": "Metals - Non Ferrous - Others"
+  },
+  "LATENTVIEW.NS": {
+    "symbol": "LATENTVIEW.NS",
+    "sector": "Entertainment & Media"
+  },
+  "TTML.NS": {
+    "symbol": "TTML.NS",
+    "sector": "Communication Services"
+  },
+  "PFOCUS.NS": {
+    "symbol": "PFOCUS.NS",
+    "sector": "Consumer Discretionary"
+  },
+  "MAPMYINDIA.NS": {
+    "symbol": "MAPMYINDIA.NS",
+    "sector": "IT Consulting & Software"
+  },
+  "GALLANTT.NS": {
+    "symbol": "GALLANTT.NS",
+    "sector": "Materials"
+  },
+  "UCOBANK.NS": {
+    "symbol": "UCOBANK.NS",
+    "sector": "Financials"
+  },
+  "RITES.NS": {
+    "symbol": "RITES.NS",
+    "sector": "Industrials"
+  },
+  "BBTC.NS": {
+    "symbol": "BBTC.NS",
+    "sector": "Consumer Staples"
+  },
+  "TEGA.NS": {
+    "symbol": "TEGA.NS",
+    "sector": "Engineering - General"
+  },
+  "BLUEDART.NS": {
+    "symbol": "BLUEDART.NS",
+    "sector": "Industrials"
+  },
+  "MMTC.NS": {
+    "symbol": "MMTC.NS",
+    "sector": "Industrials"
+  }
+}
