@@ -81,9 +81,22 @@ P = dict(
     consol_max_range_pct=10.0,  # close-to-close range of the consolidation
     entry_max_bars=40,          # breakout must happen within this many bars after D
     entry_min_move_pct=6.0,     # breakout candle % change: SOLARA 7.85%, SKYGOLD 6.13%
+    d_reanchor_max=0,           # if price undercuts D before the breakout, redraw D at the new low
+                                # (up to this many times) as long as it still sits in the fib D zone
     # exit: first DAILY CLOSE above the 1.618 target (SOLARA 11 Sep, SKYGOLD 6 May)
     # stop: daily close below D low
 )
+
+# Looser rule sets, chosen with --preset. "strict" = the SOLARA/SKYGOLD calibration above.
+# Measured on 6y daily / 3y hourly data for all 597 stocks: see results/abcd_loosen/REPORT.md
+PRESETS = {
+    "strict": {},
+    "moderate": dict(d_reanchor_max=3,                                  # redraw D if it gets undercut
+                     res_min_bars=3, res_min_touches=2, res_max_close_above20=4.5,
+                     bd_max=100, d_max_after_break=20, max_cross_bars=25,
+                     entry_min_move_pct=3.6, consol_max_range_pct=15.0, entry_max_bars=60),
+}
+PRESETS["loose"] = dict(PRESETS["moderate"], fib_b_max=0.786, fib_d_max=0.618, ab_min=100)
 
 # ----------------------------------------------------------------------------
 # TIMEFRAMES
@@ -228,6 +241,21 @@ def find_d(df, B, b_high, c_low):
     return None, "no valid D"
 
 
+def reanchor_d(df, B, b_high, c_low, k):
+    """new D after the old one was undercut at bar k: the first fresh low (no lower low over the next
+    consol_min_bars candles) within d_max_after_break bars that is still inside the fib D zone"""
+    L, n = df.Low.values, len(df)
+    for j in range(k, min(k + P["d_max_after_break"] + 1, n)):
+        if L[j] != L[B:j + 1].min():
+            continue
+        nxt = L[j + 1:j + 1 + P["consol_min_bars"]]
+        if len(nxt) and nxt.min() <= L[j]:
+            continue
+        fib_d = (L[j] - c_low) / (b_high - c_low)
+        return j if P["fib_d_min"] <= fib_d <= P["fib_d_max"] else None
+    return None
+
+
 def find_entry(df, D, d_low):
     n = len(df)
     C_, L, s9, s200 = df.Close.values, df.Low.values, df.s9.values, df.s200.values
@@ -304,7 +332,17 @@ def scan(df, symbol):
 
         c_ref = L[C] if P["c_anchor"] == "low" else C_[C]
         target = c_ref + P["target_ratio"] * (H[B] - c_ref)
-        E, einfo, _ = find_entry(df, D, L[D])
+        E, einfo, k_end = find_entry(df, D, L[D])
+        for _ in range(P["d_reanchor_max"]):
+            if einfo != "D broken":
+                break
+            D2 = reanchor_d(df, B, H[B], L[C], k_end)
+            if D2 is None or D2 in used_d:
+                break
+            D = D2
+            used_d.add(D)
+            info["fib_d"] = (L[D] - L[C]) / (H[B] - L[C])
+            E, einfo, k_end = find_entry(df, D, L[D])
         row = dict(
             symbol=symbol,
             A=d_(A), A_high=H[A], C=d_(C), C_low=L[C], B=d_(B), B_high=H[B], D=d_(D), D_low=L[D],
@@ -313,6 +351,8 @@ def scan(df, symbol):
             sma200_slope_pct=round(info["slope200"], 3), res_touches=info["touches"],
             target=round(target, 2), stop=L[D],
         )
+        if E is not None and C_[E] >= target:
+            E, einfo = None, "target already reached at breakout"
         if E is not None:
             res, xk, ret, hold = outcome(df, E, target, L[D])
             row.update(status=res, early_9sma=d_(einfo["early"]), entry=d_(E), entry_close=C_[E],
@@ -549,6 +589,8 @@ def main():
     ap.add_argument("folder", nargs="?", default="",
                     help="folder that holds the CSV files (default: ...\\Stock_data\\1_H_TF for 1h, 1_D_TF for 1d)")
     ap.add_argument("--tf", default="1h", choices=list(TF_MINUTES), help="candle timeframe (default: 1h)")
+    ap.add_argument("--preset", default="strict", choices=list(PRESETS),
+                    help="rule set: strict (original calibration), moderate or loose (more setups)")
     ap.add_argument("--recent", type=int, default=0, help="keep only setups whose D is within the last N candles")
     ap.add_argument("--from", dest="date_from", default="", help="keep setups whose D is on/after this date (YYYY-MM-DD)")
     ap.add_argument("--to", dest="date_to", default="", help="keep setups whose D is on/before this date (YYYY-MM-DD)")
@@ -584,7 +626,10 @@ def main():
                     help="write a Markdown backtest report (and equity chart PNG) to this path")
     args = ap.parse_args()
 
+    P_DAILY.update(PRESETS[args.preset])
     factor = set_timeframe(args.tf)
+    if args.preset != "strict":
+        print(f"Preset {args.preset}: " + ", ".join(f"{k}={v}" for k, v in PRESETS[args.preset].items()))
     if not args.folder:
         sub = {"1d": "1_D_TF", "1h": "1_H_TF"}.get(args.tf, f"{args.tf.upper()}_TF")
         args.folder = os.path.join(r"C:\Users\onkar\Desktop\Stock_data", sub)

@@ -1,0 +1,3 @@
+symbol,entry,exit_date,status,qty,position_rs,net_return_pct,charges_rs,pnl_rs,equity_rs
+SKYGOLD,01-Apr-2026,06-May-2026,TARGET HIT,74,24994,41.47,102,10350,35350
+SOLARA,18-Aug-2026,11-Sep-2026,TARGET HIT,64,35139,36.09,138,12667,48017
