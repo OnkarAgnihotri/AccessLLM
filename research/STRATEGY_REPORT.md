@@ -4,7 +4,17 @@
 
 ---
 
-## 0. The short answer
+> **⚠️ UPDATE (4 Oct 2026): the full portfolio backtest did NOT confirm this strategy.**
+> The `lp` backtester simulates real trading: 5 positions, 1% risk, full Indian delivery charges, and stop fills at the actual opening price when a stock gaps.
+> With default settings and ₹5 lakh, the Leaders' Pullback **lost 33% from Jul 2021 to Oct 2026 (−7.5% a year)**. Nifty gained 42% over the same period.
+> No variant tested made a worthwhile return in both the older and the newer period. See **Section 8**.
+> The per-trade figures in Sections 0–4 below were too optimistic, for two reasons:
+> - They assumed exits after a gap filled at the stop price instead of the opening price.
+> - They assumed 0.25% costs instead of the realistic 0.4–0.6%.
+>
+> **Do not trade this strategy with real money.**
+
+## 0. The short answer (original research, before the portfolio backtest)
 
 | Question | Answer from the data |
 |---|---|
@@ -296,3 +306,62 @@ Shorting overbought weak stocks showed the same high win rate but **no reliable 
 - `research/data/leaders.csv`: current Leaders List with RS, ATR, returns and RSI(2)
 - `research/data/candidates.csv`: setups as of the latest close
 - `research/scripts/`: research scripts used for every number in this report (data fetch, intraday studies, swing studies, snapshot)
+
+---
+
+## 8. Portfolio backtest results (4 Oct 2026)
+
+Run with `python -m lp backtest`. Full output is in `research/backtest/default/`: the summary, trade log, equity curve and monthly returns.
+
+**Setup:**
+- ₹5,00,000 starting capital, 1% risk per trade, max 5 positions, max 2 per sector, half size when Nifty is below its 200-day average.
+- Buy at the next open. Sell half at +1% and move the stop to entry. Sell the rest on a close above the 5-day average. Hard stop 3×ATR, time stop 10 days.
+- Costs: ₹20 brokerage per order, STT 0.1% on each side, exchange and SEBI fees, stamp duty, GST, ₹15.93 demat charge per sell, and 0.05% slippage per side.
+- Period: 26 Jul 2021 to 1 Oct 2026, on 571 stocks.
+
+![equity curve](backtest/default/equity_curve.png)
+
+| Metric | Leaders' Pullback | Nifty 50 buy and hold |
+|---|---|---|
+| Total return | **−33.2%** | +41.7% |
+| CAGR | **−7.5%** | +7.0% |
+| Max drawdown | −33.4% | −17.2% |
+| Trades | 1,230 (about 20 a month) | — |
+| Win rate | 40.1% | — |
+| Hit +1% first target | 83.6% | — |
+| Average trade after costs | −0.45% | — |
+| Charges paid | ₹1.98 lakh | — |
+
+### Why it failed
+
+1. **The edge is smaller than the costs.** With costs switched off, the same backtest wins 73% of trades and makes **+0.26% per trade** before costs. Realistic delivery costs on these position sizes are **0.4–0.6% per trade**:
+   - STT alone is 0.2% round trip;
+   - the half-exit adds a second sell order and a second demat charge;
+   - ₹20 per order is a large share of a ₹30,000–55,000 position.
+2. **Gaps after the first target.** About 1 in 4 trades hit +1% and then **opened below the entry price the next morning**, so the "free" second half became a loss. The research study had assumed these filled at the entry price.
+3. **Hitting the target is not the same as winning.** 84% of trades hit +1%, but the half sold there earns only +0.5% of the position, which costs then cancel out.
+
+### Variants tested
+
+64 runs, file `research/backtest/variant_grid.csv`, split in-sample Jul 2021–Jun 2024 and out-of-sample Jul 2024–Oct 2026. The variables were:
+- RSI(2) below 5 or below 2;
+- first target at 1%, 2%, 3% or none;
+- stop at 2× or 3× ATR;
+- half size or skip trading in a weak market;
+- brokerage ₹20 or ₹0.
+
+| Best variants (by out-of-sample average trade) | In-sample CAGR | Out-of-sample CAGR | Out-of-sample win rate | Out-of-sample profit factor |
+|---|---|---|---|---|
+| RSI(2)<2, first target 3%, stop 3×ATR, half size, ₹0 brokerage | +4.1% | +1.6% | 68% | 1.25 |
+| RSI(2)<2, first target 3%, stop 2×ATR, half size, ₹0 brokerage | +6.3% | +1.1% | 67% | 1.10 |
+| RSI(2)<2, first target 3%, stop 3×ATR, half size, ₹20 brokerage | +3.1% | +0.6% | 67% | 1.09 |
+
+The best variant earned **less than Nifty and less than a fixed deposit** in both periods, and only about 200 trades per period support it. That is not enough evidence for an edge. **Every variant with the original RSI(2)<5 rule lost money out of sample.**
+
+### Conclusion
+
+On NSE delivery trading, a 2–10 day pullback strategy that books small profits cannot overcome STT and demat charges, even when its win rate is high.
+
+The `lp` code is still useful. The data cache, signal engine, cost model and portfolio backtester can test other ideas properly. Candidates with lower turnover, where costs matter less, include:
+- **monthly momentum or sector-rotation portfolios**, the strongest effect in the academic literature (Section 1.2);
+- **longer-hold trend following.**

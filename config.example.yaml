@@ -1,0 +1,10 @@
+# Copy to config.yaml and edit. Any setting from lp/config.py can go here.
+data_dir: C:\Users\onkar\Desktop\Stock_data\lp_data
+capital: 500000
+risk_pct: 1.0
+max_positions: 5
+max_per_sector: 2
+t1_pct: 1.0
+stop_atr: 3.0
+regime_mode: half        # half | skip | ignore
+brokerage_per_order: 20  # set 0 if your broker charges no delivery brokerage
