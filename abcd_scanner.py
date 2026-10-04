@@ -347,6 +347,7 @@ def add_costs(res, cost_pct, intraday_cost_pct):
     e = pd.to_datetime(t.entry, format=DATE_FMT, errors="coerce")
     x = pd.to_datetime(t.exit_date, format=DATE_FMT, errors="coerce")
     same_day = (e.dt.date == x.dt.date) & (TF not in ("1d", "1w"))
+    t["same_day"] = same_day.where(entered)
     t["cost_pct"] = (same_day.map({True: intraday_cost_pct, False: cost_pct})).where(entered)
     t["net_return_pct"] = (t.return_pct - t.cost_pct).round(2)
     t["risk_pct"] = (100 * (t.entry_close - t.stop) / t.entry_close).round(2).where(entered)
@@ -380,9 +381,11 @@ def summarize(res):
     return pd.DataFrame(rows)
 
 
-def simulate_money(res, capital, risk_pct, max_position_pct=25.0):
+def simulate_money(res, capital, risk_pct, max_position_pct=25.0, fixed_cost_rs=0.0, intraday_fixed_cost_rs=0.0):
     """rupee profit/loss: each trade risks risk_pct of current equity between entry and the D-low stop
-    (position capped at max_position_pct of equity); trades are booked in exit order, compounding."""
+    (position capped at max_position_pct of equity); trades are booked in exit order, compounding.
+    fixed_cost_rs / intraday_fixed_cost_rs are flat rupee charges per round trip (brokerage, demat
+    charge, GST) for overnight / same-day trades, on top of the percentage costs."""
     t = res[res.status.isin(["TARGET HIT", "STOPPED"])].copy()
     if t.empty:
         return None, None
@@ -392,18 +395,94 @@ def simulate_money(res, capital, risk_pct, max_position_pct=25.0):
     for _, r in t.iterrows():
         stop_dist = max(r.risk_pct, 0.01) / 100
         position = min(equity * risk_pct / 100 / stop_dist, equity * max_position_pct / 100)
-        pnl = position * r.net_return_pct / 100
+        qty = int(position // r.entry_close)
+        if qty < 1:
+            rows.append(dict(symbol=r.symbol, entry=r.entry, exit_date=r.exit_date, status="SKIPPED (price above position size)",
+                             qty=0, position_rs=0, net_return_pct=r.net_return_pct, charges_rs=0, pnl_rs=0,
+                             equity_rs=round(equity)))
+            continue
+        position = qty * r.entry_close
+        same_day = r.get("same_day")
+        flat = intraday_fixed_cost_rs if (pd.notna(same_day) and bool(same_day)) else fixed_cost_rs
+        pnl = position * r.net_return_pct / 100 - flat
         equity += pnl
-        rows.append(dict(symbol=r.symbol, entry=r.entry, exit_date=r.exit_date, status=r.status,
+        rows.append(dict(symbol=r.symbol, entry=r.entry, exit_date=r.exit_date, status=r.status, qty=qty,
                          position_rs=round(position), net_return_pct=r.net_return_pct,
+                         charges_rs=round(position * r.cost_pct / 100 + flat),
                          pnl_rs=round(pnl), equity_rs=round(equity)))
     ledger = pd.DataFrame(rows)
     peak = ledger.equity_rs.cummax().clip(lower=capital)
+    traded = ledger[ledger.qty > 0]
     summary = dict(start_capital=round(capital), final_equity=round(equity), profit_rs=round(equity - capital),
                    return_pct=round(100 * (equity / capital - 1), 2),
                    max_drawdown_pct=round(100 * (ledger.equity_rs / peak - 1).min(), 2),
-                   trades=len(ledger))
+                   trades=len(traded), winners=int((traded.pnl_rs > 0).sum()),
+                   charges_rs=int(traded.charges_rs.sum()))
     return summary, ledger
+
+
+def write_report(path, args, res, summ, scanned_count, skipped, coverage, money_runs):
+    """Markdown backtest report (plus an equity chart PNG next to it when matplotlib is available)."""
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+
+    def md(df):
+        if df is None or df.empty:
+            return "_none_"
+        cols = list(df.columns)
+        lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
+        lines += ["| " + " | ".join("" if pd.isna(v) else str(v) for v in row) + " |" for row in df.values]
+        return "\n".join(lines)
+
+    funnel = res.status.value_counts().rename_axis("status").reset_index(name="setups")
+    entered = res[res.status.isin(["TARGET HIT", "STOPPED", "OPEN"])]
+    tcols = ["symbol", "D", "entry", "entry_close", "stop", "target", "status", "exit_date",
+             "return_pct", "net_return_pct", "hold_candles"]
+    out = [f"# A-C-B-D backtest report - {TF} timeframe", "",
+           f"- Stocks scanned: **{scanned_count}** ({skipped} skipped with fewer than 400 candles)",
+           f"- Data: **{coverage}**",
+           f"- Costs: {args.cost_pct}% (overnight) / {args.intraday_cost_pct}% (same-day) round trip, plus "
+           f"Rs {args.fixed_cost_rs:g} / Rs {args.intraday_fixed_cost_rs:g} flat charges per trade",
+           "- Entry at the close of the breakout candle; exit on the first close above the 1.618 target "
+           "or below the D low.", ""]
+    for label, money, ledger, png in money_runs:
+        out += [f"## Profit / loss: {label}", ""]
+        if money is None:
+            out += ["No closed trades, so no profit or loss.", ""]
+            continue
+        verdict = "PROFIT" if money["profit_rs"] > 0 else "LOSS"
+        out += [f"**Rs {money['start_capital']:,} -> Rs {money['final_equity']:,} = {verdict} of "
+                f"Rs {abs(money['profit_rs']):,} ({money['return_pct']:+.2f}%)**", "",
+                f"Trades {money['trades']}, winners {money['winners']}, charges paid Rs {money['charges_rs']:,}, "
+                f"max drawdown {money['max_drawdown_pct']}%", "", md(ledger), ""]
+        if png:
+            out += [f"![equity]({os.path.basename(png)})", ""]
+    out += ["## Trade statistics (after costs)", "", md(summ), "",
+            "## Trades entered", "", md(entered[[c for c in tcols if c in entered.columns]]), "",
+            "## All setups found (A-C-B-D located, with why most were not traded)", "", md(funnel), "",
+            md(res[["symbol", "A", "C", "B", "D", "fib_B", "fib_D", "status"]]), ""]
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(out))
+
+
+def plot_equity(ledger, capital, path, title):
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError:
+        return None
+    eq = [capital] + list(ledger.equity_rs)
+    fig, ax = plt.subplots(figsize=(8, 3.5))
+    ax.plot(range(len(eq)), eq, marker="o", color="#2563eb")
+    ax.axhline(capital, color="#9ca3af", lw=1, ls="--")
+    ax.set_xlabel("trade #")
+    ax.set_ylabel("equity (Rs)")
+    ax.set_title(title)
+    ax.grid(alpha=0.3)
+    fig.tight_layout()
+    fig.savefig(path, dpi=110)
+    plt.close(fig)
+    return path
 
 
 def merge_saved(path, fresh):
@@ -495,6 +574,14 @@ def main():
                     help="round-trip charges + slippage for overnight (delivery) trades, %% (default 0.35)")
     ap.add_argument("--intraday-cost-pct", type=float, default=0.15,
                     help="round-trip charges + slippage for trades closed on their entry day, %% (default 0.15)")
+    ap.add_argument("--fixed-cost-rs", type=float, default=0.0,
+                    help="flat rupees per overnight trade (brokerage + demat charge + GST), e.g. 15 at Dhan")
+    ap.add_argument("--intraday-fixed-cost-rs", type=float, default=0.0,
+                    help="flat rupees per same-day trade (brokerage + GST), e.g. 47 for Rs 20 per order")
+    ap.add_argument("--max-position-pct", type=float, default=25.0,
+                    help="largest position as %% of equity in the money simulation (default 25)")
+    ap.add_argument("--report", default="",
+                    help="write a Markdown backtest report (and equity chart PNG) to this path")
     args = ap.parse_args()
 
     factor = set_timeframe(args.tf)
@@ -516,6 +603,13 @@ def main():
         sys.exit(f"Bad date ({e}); use YYYY-MM-DD")
 
     rows, skipped = [], 0
+    cov = dict(first=None, last=None, candles=0)
+
+    def track(d):
+        if len(d):
+            cov["first"] = min(filter(None, [cov["first"], d.Date.iloc[0]]))
+            cov["last"] = max(filter(None, [cov["last"], d.Date.iloc[-1]]))
+            cov["candles"] += len(d)
 
     if args.live:
         import yfinance as yf
@@ -615,6 +709,7 @@ def main():
                     df_loaded = load(df_sym)
                     if asof is not None:
                         df_loaded = df_loaded[df_loaded.Date <= asof].reset_index(drop=True)
+                    track(df_loaded)
                     if len(df_loaded) < 400:
                         skipped += 1
                         continue
@@ -662,6 +757,7 @@ def main():
                 df = load(f)
                 if asof is not None:
                     df = df[df.Date <= asof].reset_index(drop=True)
+                track(df)
                 if len(df) < 400:
                     skipped += 1
                     continue
@@ -723,21 +819,36 @@ def main():
         print(summ.to_string(index=False))
         print(f"-> {sout}")
 
-    money, ledger = simulate_money(res, args.capital, args.risk_pct)
-    if money is not None:
-        lout = os.path.splitext(out)[0] + "_pnl.csv"
-        try:
-            ledger.to_csv(lout, index=False)
-        except Exception:
-            pass
-        verdict = "PROFIT" if money["profit_rs"] > 0 else "LOSS"
-        print(f"\nMoney simulation ({args.risk_pct}% risk per trade, closed trades in exit order):")
-        print(ledger.to_string(index=False))
-        print(f"\n  Rs {money['start_capital']:,} -> Rs {money['final_equity']:,}  =  {verdict} of "
-              f"Rs {abs(money['profit_rs']):,} ({money['return_pct']:+.2f}%), max drawdown "
-              f"{money['max_drawdown_pct']}% over {money['trades']} trade(s)")
-        print(f"-> {lout}")
+    runs = [(f"{args.risk_pct:g}% risk per trade (position capped at {args.max_position_pct:g}% of equity)",
+             args.risk_pct, args.max_position_pct, "_pnl"),
+            ("full capital in every trade", 100.0, 100.0, "_pnl_full")]
+    money_runs = []
+    for label, risk, cap, suffix in runs:
+        money, ledger = simulate_money(res, args.capital, risk, cap, args.fixed_cost_rs, args.intraday_fixed_cost_rs)
+        png = None
+        if money is not None:
+            lout = os.path.splitext(out)[0] + suffix + ".csv"
+            try:
+                ledger.to_csv(lout, index=False)
+            except Exception:
+                pass
+            verdict = "PROFIT" if money["profit_rs"] > 0 else "LOSS"
+            print(f"\nMoney simulation - {label}, Rs {args.capital:,.0f} start, closed trades in exit order:")
+            print(ledger.to_string(index=False))
+            print(f"\n  Rs {money['start_capital']:,} -> Rs {money['final_equity']:,}  =  {verdict} of "
+                  f"Rs {abs(money['profit_rs']):,} ({money['return_pct']:+.2f}%), max drawdown "
+                  f"{money['max_drawdown_pct']}% over {money['trades']} trade(s), charges Rs {money['charges_rs']:,}")
+            print(f"-> {lout}")
+            if args.report:
+                png = plot_equity(ledger, args.capital, os.path.splitext(args.report)[0] + suffix + ".png",
+                                  f"{TF} A-C-B-D - {label}")
+        money_runs.append((label, money, ledger, png))
 
+    if args.report:
+        coverage = (f"{cov['first']:%d-%b-%Y %H:%M} to {cov['last']:%d-%b-%Y %H:%M}, {cov['candles']:,} candles"
+                    if cov["first"] is not None else "n/a")
+        write_report(args.report, args, res, summ, scanned_count, skipped, coverage, money_runs)
+        print(f"\nReport -> {args.report}")
 
 if __name__ == "__main__":
     main()
