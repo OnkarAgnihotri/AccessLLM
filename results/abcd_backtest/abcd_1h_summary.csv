@@ -1,0 +1,5 @@
+period,setups_entered,target_hit,stopped,open,win_rate_pct,avg_gross_pct,avg_net_pct,avg_win_pct,avg_loss_pct,avg_r,profit_factor,avg_hold_candles
+2024,2,1,1,0,50.0,6.62,6.28,20.55,-8.0,1.8,2.57,81.5
+2025,4,1,3,0,25.0,-4.59,-4.88,4.07,-7.87,-0.75,0.17,12.2
+2026,4,0,4,0,0.0,-6.42,-6.77,,-6.77,-1.12,0.0,260.2
+ALL,10,2,8,0,20.0,-3.08,-3.41,12.31,-7.34,-0.39,0.42,125.3

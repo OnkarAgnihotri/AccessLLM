@@ -21,9 +21,18 @@ Usage (Windows):
     python abcd_scanner.py --symbols SKYGOLD,SOLARA --live
     python abcd_scanner.py --recent 60
 
+    # 5. 15-minute scan (data in C:\Users\onkar\Desktop\Stock_data\15M_TF). Yahoo only serves the last
+    #    60 days of 15m candles, so each --live run ADDS the new candles to the saved CSVs: run it daily and
+    #    the history keeps growing. Longer 15m history (e.g. from a broker API) can be dropped into the folder.
+    python abcd_scanner.py --tf 15m --live
+
+    # 6. Backtest money settings (used for the profit/loss summary):
+    python abcd_scanner.py --tf 1d --capital 500000 --risk-pct 1 --cost-pct 0.35
+
 CSV format expected: Date,Open,High,Low,Close,Volume
     intraday: Date (or Datetime) holds date + time, e.g. 2026-09-29 09:15:00 or 2026-09-29 09:15:00+05:30
-Output: abcd_results_1h.csv / abcd_results.csv in the data folder + backtest summary.
+Output: abcd_results_1h.csv / abcd_results.csv in the data folder + backtest summary
+        (gross and after-cost returns, and a rupee profit/loss simulation with risk-based position sizing).
 """
 
 import argparse
@@ -328,8 +337,25 @@ def collect_files(folder, recursive):
     return sorted(uniq.values(), key=lambda p: os.path.basename(p).upper())
 
 
+def add_costs(res, cost_pct, intraday_cost_pct):
+    """net return after charges. Delivery (overnight) trades pay cost_pct round trip; on intraday
+    timeframes a trade that exits on its entry day pays the lower intraday rate."""
+    t = res.copy()
+    if "entry" not in t.columns:
+        return t
+    entered = t.status.isin(["TARGET HIT", "STOPPED", "OPEN"])
+    e = pd.to_datetime(t.entry, format=DATE_FMT, errors="coerce")
+    x = pd.to_datetime(t.exit_date, format=DATE_FMT, errors="coerce")
+    same_day = (e.dt.date == x.dt.date) & (TF not in ("1d", "1w"))
+    t["cost_pct"] = (same_day.map({True: intraday_cost_pct, False: cost_pct})).where(entered)
+    t["net_return_pct"] = (t.return_pct - t.cost_pct).round(2)
+    t["risk_pct"] = (100 * (t.entry_close - t.stop) / t.entry_close).round(2).where(entered)
+    t["r_multiple"] = (t.net_return_pct / t.risk_pct).round(2)
+    return t
+
+
 def summarize(res):
-    """backtest statistics for setups that were entered"""
+    """backtest statistics for setups that were entered (gross and after costs)"""
     t = res[res.status.isin(["TARGET HIT", "STOPPED", "OPEN"])].copy()
     if t.empty:
         return None
@@ -337,19 +363,68 @@ def summarize(res):
 
     def stats(g, label):
         closed = g[g.status != "OPEN"]
-        wins, losses = closed[closed.status == "TARGET HIT"], closed[closed.status == "STOPPED"]
-        gross_win, gross_loss = wins.return_pct.sum(), -losses.return_pct.sum()
-        return dict(period=label, setups_entered=len(g), target_hit=len(wins), stopped=len(losses),
-                    open=int((g.status == "OPEN").sum()),
+        wins, losses = closed[closed.net_return_pct > 0], closed[closed.net_return_pct <= 0]
+        gross_win, gross_loss = wins.net_return_pct.sum(), -losses.net_return_pct.sum()
+        return dict(period=label, setups_entered=len(g), target_hit=int((closed.status == "TARGET HIT").sum()),
+                    stopped=int((closed.status == "STOPPED").sum()), open=int((g.status == "OPEN").sum()),
                     win_rate_pct=round(100 * len(wins) / len(closed), 1) if len(closed) else None,
-                    avg_return_pct=round(closed.return_pct.mean(), 2) if len(closed) else None,
-                    avg_win_pct=round(wins.return_pct.mean(), 2) if len(wins) else None,
-                    avg_loss_pct=round(losses.return_pct.mean(), 2) if len(losses) else None,
+                    avg_gross_pct=round(closed.return_pct.mean(), 2) if len(closed) else None,
+                    avg_net_pct=round(closed.net_return_pct.mean(), 2) if len(closed) else None,
+                    avg_win_pct=round(wins.net_return_pct.mean(), 2) if len(wins) else None,
+                    avg_loss_pct=round(losses.net_return_pct.mean(), 2) if len(losses) else None,
+                    avg_r=round(closed.r_multiple.mean(), 2) if len(closed) else None,
                     profit_factor=round(gross_win / gross_loss, 2) if gross_loss > 0 else None,
                     avg_hold_candles=round(closed.hold_candles.mean(), 1) if len(closed) else None)
 
     rows = [stats(g, str(y)) for y, g in t.groupby("year")] + [stats(t, "ALL")]
     return pd.DataFrame(rows)
+
+
+def simulate_money(res, capital, risk_pct, max_position_pct=25.0):
+    """rupee profit/loss: each trade risks risk_pct of current equity between entry and the D-low stop
+    (position capped at max_position_pct of equity); trades are booked in exit order, compounding."""
+    t = res[res.status.isin(["TARGET HIT", "STOPPED"])].copy()
+    if t.empty:
+        return None, None
+    t["_x"] = pd.to_datetime(t.exit_date, format=DATE_FMT)
+    t = t.sort_values("_x")
+    equity, rows = float(capital), []
+    for _, r in t.iterrows():
+        stop_dist = max(r.risk_pct, 0.01) / 100
+        position = min(equity * risk_pct / 100 / stop_dist, equity * max_position_pct / 100)
+        pnl = position * r.net_return_pct / 100
+        equity += pnl
+        rows.append(dict(symbol=r.symbol, entry=r.entry, exit_date=r.exit_date, status=r.status,
+                         position_rs=round(position), net_return_pct=r.net_return_pct,
+                         pnl_rs=round(pnl), equity_rs=round(equity)))
+    ledger = pd.DataFrame(rows)
+    peak = ledger.equity_rs.cummax().clip(lower=capital)
+    summary = dict(start_capital=round(capital), final_equity=round(equity), profit_rs=round(equity - capital),
+                   return_pct=round(100 * (equity / capital - 1), 2),
+                   max_drawdown_pct=round(100 * (ledger.equity_rs / peak - 1).min(), 2),
+                   trades=len(ledger))
+    return summary, ledger
+
+
+def merge_saved(path, fresh):
+    """saved candles + freshly downloaded ones (fresh wins on overlap). If the overlapping prices
+    disagree by more than 0.5% (a split/dividend re-adjusted Yahoo's history) the old file is dropped."""
+    if not os.path.exists(path):
+        return fresh
+    try:
+        old = pd.read_csv(path)
+        old.columns = [c.strip().capitalize() for c in old.columns]
+        old = old.rename(columns={"Datetime": "Date"})[list(fresh.columns)]
+    except Exception:
+        return fresh
+    o = old.assign(_k=parse_dates(old.Date)).dropna(subset=["_k"]).drop_duplicates("_k").set_index("_k")
+    f = fresh.assign(_k=parse_dates(fresh.Date)).dropna(subset=["_k"]).drop_duplicates("_k").set_index("_k")
+    both = o.index.intersection(f.index)
+    if len(both) and (o.Close[both].astype(float) / f.Close[both].astype(float) - 1).abs().max() > 0.005:
+        return fresh
+    merged = pd.concat([o[~o.index.isin(f.index)], f]).sort_index()
+    merged["Date"] = merged.index.strftime("%Y-%m-%d %H:%M:%S")
+    return merged.reset_index(drop=True)[list(fresh.columns)]
 
 
 def load_metadata_symbols(path=""):
@@ -413,6 +488,13 @@ def main():
                     help="batch size for concurrent Yahoo Finance downloads (default: 50)")
     ap.add_argument("--no-save", action="store_true",
                     help="do not save fetched Yahoo Finance data to local CSV files")
+    ap.add_argument("--capital", type=float, default=500000, help="starting capital for the profit/loss simulation")
+    ap.add_argument("--risk-pct", type=float, default=1.0,
+                    help="%% of equity lost if a trade hits its D-low stop (sets position size)")
+    ap.add_argument("--cost-pct", type=float, default=0.35,
+                    help="round-trip charges + slippage for overnight (delivery) trades, %% (default 0.35)")
+    ap.add_argument("--intraday-cost-pct", type=float, default=0.15,
+                    help="round-trip charges + slippage for trades closed on their entry day, %% (default 0.15)")
     args = ap.parse_args()
 
     factor = set_timeframe(args.tf)
@@ -516,15 +598,21 @@ def main():
                     if not all(col in df_sym.columns for col in req_cols):
                         continue
 
+                    df_sym = df_sym[req_cols]
+                    if args.tf not in ("1d", "1w"):
+                        # Yahoo keeps only 60-730 days of intraday candles: add the fresh candles
+                        # to what is already saved so the local history keeps growing
+                        df_sym = merge_saved(os.path.join(args.folder, f"{clean_sym}.csv"), df_sym)
+
                     # Save fresh data to local CSV
                     if not args.no_save:
                         csv_file = os.path.join(args.folder, f"{clean_sym}.csv")
                         try:
-                            df_sym[req_cols].to_csv(csv_file, index=False)
+                            df_sym.to_csv(csv_file, index=False)
                         except Exception:
                             pass
 
-                    df_loaded = load(df_sym[req_cols])
+                    df_loaded = load(df_sym)
                     if asof is not None:
                         df_loaded = df_loaded[df_loaded.Date <= asof].reset_index(drop=True)
                     if len(df_loaded) < 400:
@@ -600,7 +688,7 @@ def main():
         print(f"No setups found in {scanned_count} stock(s){note}.")
         return
 
-    res = pd.DataFrame(rows)
+    res = add_costs(pd.DataFrame(rows), args.cost_pct, args.intraday_cost_pct)
     res["_d"] = pd.to_datetime(res.D, format=DATE_FMT)
     res = res.sort_values(["_d", "symbol"]).drop(columns="_d").reset_index(drop=True)
     default_name = f"abcd_results_{args.tf}.csv"
@@ -630,9 +718,25 @@ def main():
             summ.to_csv(sout, index=False)
         except Exception:
             pass
-        print("\nBacktest summary (closed trades; OPEN marked at latest close, not counted in win rate):")
+        print(f"\nBacktest summary (closed trades, after {args.cost_pct}% delivery / "
+              f"{args.intraday_cost_pct}% same-day costs; OPEN trades not counted in win rate):")
         print(summ.to_string(index=False))
         print(f"-> {sout}")
+
+    money, ledger = simulate_money(res, args.capital, args.risk_pct)
+    if money is not None:
+        lout = os.path.splitext(out)[0] + "_pnl.csv"
+        try:
+            ledger.to_csv(lout, index=False)
+        except Exception:
+            pass
+        verdict = "PROFIT" if money["profit_rs"] > 0 else "LOSS"
+        print(f"\nMoney simulation ({args.risk_pct}% risk per trade, closed trades in exit order):")
+        print(ledger.to_string(index=False))
+        print(f"\n  Rs {money['start_capital']:,} -> Rs {money['final_equity']:,}  =  {verdict} of "
+              f"Rs {abs(money['profit_rs']):,} ({money['return_pct']:+.2f}%), max drawdown "
+              f"{money['max_drawdown_pct']}% over {money['trades']} trade(s)")
+        print(f"-> {lout}")
 
 
 if __name__ == "__main__":
