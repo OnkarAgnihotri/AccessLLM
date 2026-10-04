@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+# scanner download/output folder created with a Windows-style name
+C:*
