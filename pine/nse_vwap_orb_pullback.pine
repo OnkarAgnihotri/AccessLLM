@@ -13,6 +13,8 @@
 // Risk:    qty = equity * risk% / |entry - stop|; daily stop -2R or 2 consecutive losses;
 //          max trades/day; no entries 11:30-13:30; hard square-off at 15:10.
 //
+// Defaults = v2 (research/LOSS_ANALYSIS.md): narrow-CPR days only, 5m ATR >= 0.4% of price, stop 2 x ATR(5m),
+// no RS / index / daily / room filters. For v1 set: stop 0, CPR 0.6, ATR 0, RS/index/daily on, room 2.
 // Not compiled or verified in TradingView yet - expect minor fixes. Index symbols have no volume
 // in TradingView, so index direction uses the index 21 EMA instead of index VWAP.
 // =====================================================================================
@@ -28,7 +30,8 @@ maxDayR    = input.float(2.0, "Daily stop (R)", minval=0.5, group=grpR)
 maxConsec  = input.int(2, "Halt after N consecutive losing trades", minval=1, group=grpR)
 maxTrades  = input.int(5, "Max trades per day", minval=1, group=grpR)
 t1R        = input.float(1.5, "Target 1 (R) - book 50%", minval=0.5, group=grpR)
-minRoomR   = input.float(2.0, "Required room to next level (R)", minval=1.0, group=grpR)
+minRoomR   = input.float(0.0, "Required room to next level (R), v1 = 2", minval=0.0, group=grpR)
+stopAtrX   = input.float(2.0, "v2: stop = N x ATR(5m) (0 = v1 structural stop)", minval=0.0, step=0.25, group=grpR)
 maxLev     = input.float(3.0, "Max position value / equity", minval=1.0, group=grpR)
 
 grpF = "Filters"
@@ -38,10 +41,11 @@ allowLong  = input.bool(true, "Longs", group=grpF)
 allowShort = input.bool(true, "Shorts", group=grpF)
 rvolMin    = input.float(1.5, "Opening RVol min (09:15-09:30 vs 20-day avg)", minval=0.0, group=grpF)
 idxSym     = input.symbol("NSE:NIFTY", "Benchmark (or sector index, e.g. NSE:BANKNIFTY)", group=grpF)
-useRS      = input.bool(true, "Require RS/RW vs benchmark", group=grpF)
-useIdxBias = input.bool(true, "Require benchmark on same side of its 21 EMA", group=grpF)
-useDaily   = input.bool(true, "Require daily EMA 20/50 trend", group=grpF)
-cprWideMax = input.float(0.6, "Skip ORB if CPR width % >", minval=0.0, group=grpF)
+useRS      = input.bool(false, "Require RS/RW vs benchmark (v1 = on)", group=grpF)
+useIdxBias = input.bool(false, "Require benchmark on same side of its 21 EMA (v1 = on)", group=grpF)
+useDaily   = input.bool(false, "Require daily EMA 20/50 trend (v1 = on)", group=grpF)
+cprWideMax = input.float(0.25, "Trade only if CPR width % <= (v1 = 0.6, ORB only)", minval=0.0, group=grpF)
+minAtrPct  = input.float(0.4, "v2: min ATR(5m) as % of price", minval=0.0, step=0.05, group=grpF)
 volMult    = input.float(1.5, "Signal candle volume vs 20-bar avg", minval=0.0, group=grpF)
 
 grpS = "Sessions (IST)"
@@ -124,7 +128,7 @@ tc    = 2 * pivot - bc
 cprW  = math.abs(tc - bc) / pivot * 100
 r1    = 2 * pivot - pdl
 s1    = 2 * pivot - pdh
-cprOK = cprW <= cprWideMax
+cprOK = cprW <= cprWideMax and atr / close * 100 >= minAtrPct
 
 // ----------------------------------------------------------------------------- benchmark RS / bias
 idxC   = request.security(idxSym, timeframe.period, close)
@@ -201,10 +205,10 @@ aShortStop = math.min(high + 0.1 * atr, orMid)
 bWin = (inAM and barsToday >= 7) or inPM          // from 09:45
 rsiHeldUp = ta.lowest(rsi, 4) >= 45 and rsi > rsi[1]
 rsiHeldDn = ta.highest(rsi, 4) <= 55 and rsi < rsi[1]
-bLong = useB and allowLong and bWin and shareAbove >= 0.7 and tagUp1 and ema9 > ema21
+bLong = useB and allowLong and bWin and cprOK and shareAbove >= 0.7 and tagUp1 and ema9 > ema21
      and low <= sVwap + 0.1 * atr and close > sVwap and (hammer or bullEng) and rsiHeldUp
      and volume < ta.highest(volume, 10) and close < up2 and rvolOK and rsLong and idxBull
-bShort = useB and allowShort and bWin and shareAbove <= 0.3 and tagDn1 and ema9 < ema21
+bShort = useB and allowShort and bWin and cprOK and shareAbove <= 0.3 and tagDn1 and ema9 < ema21
      and high >= sVwap - 0.1 * atr and close < sVwap and (star or bearEng) and rsiHeldDn
      and volume < ta.highest(volume, 10) and close > dn2 and rvolOK and rsShort and idxBear
 
@@ -229,28 +233,30 @@ var int pendingSide = 0
 // ----------------------------------------------------------------------------- entries
 if canEnter and not na(atr)
     if aLong
-        R = close - aLongStop
-        if R > 0 and R <= 1.2 * dATR / 4 and roomLong(close, R)
+        stA = stopAtrX > 0 ? close - stopAtrX * atr : aLongStop
+        R = close - stA
+        if R > 0 and (stopAtrX > 0 or R <= 1.2 * dATR / 4) and roomLong(close, R)
             q = qtyFor(close, R)
             if q >= 1
                 pEntry := close
-                pStop := aLongStop
+                pStop := stA
                 pT1 := close + t1R * R
                 t1Done := false
                 strategy.entry("L", strategy.long, qty=q, comment="A-ORB L")
     else if aShort
-        R = aShortStop - close
-        if R > 0 and R <= 1.2 * dATR / 4 and roomShort(close, R)
+        stS = stopAtrX > 0 ? close + stopAtrX * atr : aShortStop
+        R = stS - close
+        if R > 0 and (stopAtrX > 0 or R <= 1.2 * dATR / 4) and roomShort(close, R)
             q = qtyFor(close, R)
             if q >= 1
                 pEntry := close
-                pStop := aShortStop
+                pStop := stS
                 pT1 := close - t1R * R
                 t1Done := false
                 strategy.entry("S", strategy.short, qty=q, comment="A-ORB S")
     else if bLong
         e = high + syminfo.mintick
-        st = low - 0.1 * atr
+        st = stopAtrX > 0 ? e - stopAtrX * atr : low - 0.1 * atr
         R = e - st
         if R > 0 and R <= 3 * atr and roomLong(e, R)
             q = qtyFor(e, R)
@@ -264,7 +270,7 @@ if canEnter and not na(atr)
                 strategy.entry("L", strategy.long, qty=q, stop=e, comment="B-VWAP L")
     else if bShort
         e = low - syminfo.mintick
-        st = high + 0.1 * atr
+        st = stopAtrX > 0 ? e + stopAtrX * atr : high + 0.1 * atr
         R = st - e
         if R > 0 and R <= 3 * atr and roomShort(e, R)
             q = qtyFor(e, R)

@@ -1,0 +1,69 @@
+entries,exit,filter,trades,win,gross,net,avg,pf,f60_n,f60_net,l40_n,l40_net
+PLAYBOOK,stop 2 ATR,none,49,44.9,1955,-144,-2.9,0.97,24,447,25,-592
+PLAYBOOK,stop 2 ATR,no entry before 10:00,40,45.0,1792,80,2.0,1.02,19,-164,21,244
+PLAYBOOK,stop 2 ATR,no entry after 11:00,33,45.5,1308,-105,-3.2,0.98,16,344,17,-449
+PLAYBOOK,stop 2 ATR,dist from VWAP <= 1 ATR,27,40.7,286,-858,-31.8,0.73,17,-74,10,-783
+PLAYBOOK,stop 2 ATR,dist from VWAP <= 2 ATR,38,44.7,1265,-359,-9.4,0.93,19,368,19,-727
+PLAYBOOK,stop 2 ATR,RVol >= 2,33,48.5,1754,335,10.1,1.09,17,-27,16,362
+PLAYBOOK,stop 2 ATR,RVol >= 3,16,50.0,1181,495,30.9,1.26,11,-300,5,795
+PLAYBOOK,stop 2 ATR,narrow CPR < 0.25%,19,52.6,1613,789,41.5,1.39,7,539,12,250
+PLAYBOOK,stop 2 ATR,RS vs Nifty >= 1%,34,50.0,2146,676,19.9,1.16,15,846,19,-170
+PLAYBOOK,stop 2 ATR,RS vs Nifty >= 2%,21,66.7,2964,2043,97.3,1.9,9,1241,12,803
+PLAYBOOK,stop 2 ATR,5m ATR >= 0.4% of price,21,66.7,2861,1939,92.3,1.78,8,1086,13,853
+PLAYBOOK,stop 2 ATR,setup A only,32,50.0,1927,550,17.2,1.16,14,890,18,-341
+PLAYBOOK,stop 2 ATR,setup B only,18,33.3,-62,-824,-45.8,0.67,10,-443,8,-381
+PLAYBOOK,stop 2 ATR,longs only,33,54.5,3072,1638,49.6,1.47,18,428,15,1210
+PLAYBOOK,stop 2 ATR,shorts only,16,25.0,-1117,-1782,-111.4,0.22,6,20,10,-1802
+PLAYBOOK,stop 2 ATR,with Nifty daily trend,27,33.3,-361,-1507,-55.8,0.6,17,295,10,-1802
+PLAYBOOK,stop 2 ATR,two closes beyond level,44,50.0,2875,978,22.2,1.21,22,780,22,199
+PLAYBOOK,stop floor,none,50,40.0,143,-1993,-39.9,0.58,24,-657,26,-1337
+PLAYBOOK,stop floor,no entry before 10:00,41,39.0,374,-1376,-33.6,0.62,19,-930,22,-446
+PLAYBOOK,stop floor,no entry after 11:00,33,39.4,114,-1296,-39.3,0.61,16,-128,17,-1168
+PLAYBOOK,stop floor,dist from VWAP <= 1 ATR,27,40.7,377,-774,-28.7,0.67,17,-374,10,-400
+PLAYBOOK,stop floor,dist from VWAP <= 2 ATR,38,42.1,388,-1239,-32.6,0.65,19,-227,19,-1012
+PLAYBOOK,stop floor,RVol >= 2,33,48.5,877,-549,-16.6,0.8,17,-492,16,-57
+PLAYBOOK,stop floor,RVol >= 3,16,50.0,678,-11,-0.7,0.99,11,-546,5,535
+PLAYBOOK,stop floor,narrow CPR < 0.25%,20,40.0,-185,-1043,-52.2,0.46,7,-63,13,-981
+PLAYBOOK,stop floor,RS vs Nifty >= 1%,35,45.7,605,-907,-25.9,0.72,15,112,20,-1018
+PLAYBOOK,stop floor,RS vs Nifty >= 2%,21,57.1,1074,156,7.4,1.09,9,549,12,-394
+PLAYBOOK,stop floor,5m ATR >= 0.4% of price,21,57.1,1208,289,13.7,1.16,8,330,13,-42
+PLAYBOOK,stop floor,setup A only,33,48.5,801,-624,-18.9,0.77,14,69,19,-692
+PLAYBOOK,stop floor,setup B only,18,22.2,-755,-1507,-83.7,0.3,10,-725,8,-782
+PLAYBOOK,stop floor,longs only,34,47.1,818,-649,-19.1,0.78,18,-315,16,-335
+PLAYBOOK,stop floor,shorts only,16,25.0,-675,-1344,-84.0,0.25,6,-342,10,-1002
+PLAYBOOK,stop floor,with Nifty daily trend,27,37.0,-359,-1507,-55.8,0.42,17,-505,10,-1002
+PLAYBOOK,stop floor,two closes beyond level,45,44.4,754,-1180,-26.2,0.7,22,-376,23,-804
+RVOL>=1.5,stop 2 ATR,none,468,39.1,-2682,-22509,-48.1,0.65,243,-14639,225,-7870
+RVOL>=1.5,stop 2 ATR,no entry before 10:00,373,40.5,-190,-16003,-42.9,0.68,182,-8601,191,-7402
+RVOL>=1.5,stop 2 ATR,no entry after 11:00,331,37.2,-3997,-17995,-54.4,0.65,167,-11911,164,-6084
+RVOL>=1.5,stop 2 ATR,dist from VWAP <= 1 ATR,168,34.5,-3347,-10413,-62.0,0.59,84,-3996,84,-6417
+RVOL>=1.5,stop 2 ATR,dist from VWAP <= 2 ATR,314,36.9,-4201,-17474,-55.6,0.62,169,-11020,145,-6454
+RVOL>=1.5,stop 2 ATR,RVol >= 2,297,41.1,366,-12222,-41.2,0.72,156,-7418,141,-4804
+RVOL>=1.5,stop 2 ATR,RVol >= 3,142,43.7,2340,-3680,-25.9,0.83,77,-3096,65,-585
+RVOL>=1.5,stop 2 ATR,narrow CPR < 0.25%,149,43.0,3564,-2772,-18.6,0.85,71,-1466,78,-1306
+RVOL>=1.5,stop 2 ATR,RS vs Nifty >= 1%,365,38.1,-4862,-20317,-55.7,0.63,187,-13217,178,-7100
+RVOL>=1.5,stop 2 ATR,RS vs Nifty >= 2%,219,41.1,-1380,-10678,-48.8,0.72,113,-7926,106,-2751
+RVOL>=1.5,stop 2 ATR,5m ATR >= 0.4% of price,200,42.5,1150,-7337,-36.7,0.8,96,-5310,104,-2027
+RVOL>=1.5,stop 2 ATR,setup A only,401,38.7,-4460,-21453,-53.5,0.63,207,-13363,194,-8090
+RVOL>=1.5,stop 2 ATR,setup B only,101,33.7,-1946,-6178,-61.2,0.56,48,-2279,53,-3900
+RVOL>=1.5,stop 2 ATR,longs only,310,38.7,-1047,-14212,-45.8,0.69,165,-11813,145,-2399
+RVOL>=1.5,stop 2 ATR,shorts only,158,39.9,-1635,-8296,-52.5,0.58,78,-2826,80,-5470
+RVOL>=1.5,stop 2 ATR,with Nifty daily trend,208,36.1,-3284,-12060,-58.0,0.57,128,-6590,80,-5470
+RVOL>=1.5,stop 2 ATR,two closes beyond level,400,38.5,-3512,-20456,-51.1,0.64,197,-12326,203,-8130
+RVOL>=1.5,stop floor,none,501,38.5,-106,-21399,-42.7,0.61,255,-12412,246,-8987
+RVOL>=1.5,stop floor,no entry before 10:00,389,38.8,-726,-17255,-44.4,0.58,187,-8500,202,-8755
+RVOL>=1.5,stop floor,no entry after 11:00,357,36.1,-3008,-18150,-50.8,0.57,177,-10135,180,-8015
+RVOL>=1.5,stop floor,dist from VWAP <= 1 ATR,176,37.5,-518,-7977,-45.3,0.57,87,-3449,89,-4528
+RVOL>=1.5,stop floor,dist from VWAP <= 2 ATR,341,37.0,-2156,-16621,-48.7,0.56,178,-9003,163,-7619
+RVOL>=1.5,stop floor,RVol >= 2,324,40.4,3238,-10559,-32.6,0.7,165,-5280,159,-5279
+RVOL>=1.5,stop floor,RVol >= 3,154,45.5,4209,-2366,-15.4,0.86,79,-2179,75,-187
+RVOL>=1.5,stop floor,narrow CPR < 0.25%,160,40.6,812,-6002,-37.5,0.64,73,-2266,87,-3736
+RVOL>=1.5,stop floor,RS vs Nifty >= 1%,395,37.2,-1151,-17938,-45.4,0.61,198,-9974,197,-7964
+RVOL>=1.5,stop floor,RS vs Nifty >= 2%,236,39.4,1047,-9020,-38.2,0.69,120,-5947,116,-3072
+RVOL>=1.5,stop floor,5m ATR >= 0.4% of price,220,41.4,2853,-6549,-29.8,0.77,102,-2939,118,-3610
+RVOL>=1.5,stop floor,setup A only,426,39.4,1352,-16792,-39.4,0.64,217,-9599,209,-7193
+RVOL>=1.5,stop floor,setup B only,102,32.4,-2098,-6380,-62.5,0.44,48,-2647,54,-3733
+RVOL>=1.5,stop floor,longs only,333,36.9,-1698,-15855,-47.6,0.59,174,-10663,159,-5192
+RVOL>=1.5,stop floor,shorts only,168,41.7,1592,-5544,-33.0,0.66,81,-1749,87,-3795
+RVOL>=1.5,stop floor,with Nifty daily trend,221,37.1,-1063,-10431,-47.2,0.55,134,-6636,87,-3795
+RVOL>=1.5,stop floor,two closes beyond level,432,38.0,-1701,-20052,-46.4,0.57,209,-10790,223,-9262

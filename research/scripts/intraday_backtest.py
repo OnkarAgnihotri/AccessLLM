@@ -104,7 +104,8 @@ def signals(d, a):
     ibr = (d.ic < d.ie21) if a.idx_bias else True
     du = ((d.pdc > d.e20) & (d.e20 > d.e50)) if a.daily else True
     dd = ((d.pdc < d.e20) & (d.e20 < d.e50)) if a.daily else True
-    cpr_ok = d.cprw <= a.cpr_max
+    cpr_ok = (d.cprw <= a.cpr_max) & (d.atr / d.Close * 100 >= a.min_atr_pct)   # v2: only stocks that move
+    b_ok = cpr_ok if a.cpr_on_b else True                                       # v1 has no CPR rule for setup B
     vsurge = d.Volume >= 1.5 * d.volavg
     body, rng = (c - o).abs(), (h - l).clip(lower=TICK)
     hammer = ((np.minimum(o, c) - l) >= 2 * body) & (c >= l + rng * 2 / 3)
@@ -117,9 +118,9 @@ def signals(d, a):
     d["aS"] = a.use_a & am & (c < d.orl - 0.1 * d.atr) & (c < d.vwap) & vw_dn & (d.ema9 < d.ema21) & d.rsi.between(20, 40) \
         & vsurge & (c > d.dn2) & rvol_ok & rs_s & ibr & dd & cpr_ok
     bwin = (am & (d.bar_n >= 7)) | pm
-    d["bL"] = a.use_b & bwin & (d.above >= 0.7) & d.tag_up1 & (d.ema9 > d.ema21) & (l <= d.vwap + 0.1 * d.atr) & (c > d.vwap) \
+    d["bL"] = a.use_b & bwin & b_ok & (d.above >= 0.7) & d.tag_up1 & (d.ema9 > d.ema21) & (l <= d.vwap + 0.1 * d.atr) & (c > d.vwap) \
         & (hammer | beng) & (d.rsi_lo4 >= 45) & (d.rsi > d.rsi.shift()) & (d.Volume < d.vol_hi10) & (c < d.up2) & rvol_ok & rs_l & ib
-    d["bS"] = a.use_b & bwin & (d.above <= 0.3) & d.tag_dn1 & (d.ema9 < d.ema21) & (h >= d.vwap - 0.1 * d.atr) & (c < d.vwap) \
+    d["bS"] = a.use_b & bwin & b_ok & (d.above <= 0.3) & d.tag_dn1 & (d.ema9 < d.ema21) & (h >= d.vwap - 0.1 * d.atr) & (c < d.vwap) \
         & (star | seng) & (d.rsi_hi4 <= 55) & (d.rsi < d.rsi.shift()) & (d.Volume < d.vol_hi10) & (c > d.dn2) & rvol_ok & rs_s & ibr
     for k in ("aL", "aS", "bL", "bS"):
         d[k] = d[k].fillna(False).astype(bool)
@@ -167,6 +168,9 @@ def simulate(sym, d, a):
             stop = L[i] - 0.1 * ATR[i] if side == 1 else H[i] + 0.1 * ATR[i]
             R = (plan_e - stop) * side
             ok = R > 0 and R <= 3 * ATR[i]
+        if a.stop_atr > 0:                         # v2: fixed ATR stop replaces the structural stop
+            stop, R = plan_e - side * a.stop_atr * ATR[i], a.stop_atr * ATR[i]
+            ok = True
         floor = max(a.min_stop_atr * ATR[i], a.min_stop_pct / 100 * plan_e)
         if ok and R < floor:                       # noise floor: widen the stop, never tighten
             stop, R = plan_e - side * floor, floor
@@ -312,10 +316,17 @@ def main():
     ap.add_argument("--min-stop-atr", type=float, default=0.0, help="stop at least this many 5m ATRs away")
     ap.add_argument("--min-stop-pct", type=float, default=0.0, help="stop at least this %% of price away")
     ap.add_argument("--a-stop", default="rule", choices=["rule", "or_far"], help="ORB stop: playbook rule or far side of the range")
+    ap.add_argument("--stop-atr", type=float, default=0.0, help="v2: stop = entry -/+ this many 5m ATRs")
+    ap.add_argument("--min-atr-pct", type=float, default=0.0, help="v2: skip stocks whose 5m ATR is below this %% of price")
+    ap.add_argument("--cpr-on-b", action="store_true", help="v2: apply the CPR/ATR filter to setup B too")
+    ap.add_argument("--v2", action="store_true", help="v2 preset (research/LOSS_ANALYSIS.md)")
     ap.add_argument("--max-open", type=int, default=3)
     ap.add_argument("--max-trades", type=int, default=5)
     ap.add_argument("--day-stop-r", type=float, default=2.0)
     a = ap.parse_args()
+    if a.v2:
+        a.rs = a.idx_bias = a.daily = False
+        a.cpr_max, a.min_atr_pct, a.stop_atr, a.room, a.cpr_on_b = 0.25, 0.4, 2.0, 0.0, True
     os.makedirs(a.out, exist_ok=True)
 
     nf = load(os.path.join(a.data, "5m", "^NSEI.csv"))

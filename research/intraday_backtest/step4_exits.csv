@@ -1,0 +1,29 @@
+entries,test,trades,win,net_rs,avg,pf,gross,first60_net,last40_net,first60_n,last40_n
+PLAYBOOK entries,"v1 (rule stop, T1 1.5R, 9EMA trail)",54,25.9,-2927,-54.2,0.25,-623,-1045,-1882,26,28
+PLAYBOOK entries,stop floor 1ATR/0.4%,50,40.0,-1993,-39.9,0.58,143,-657,-1337,24,26
+PLAYBOOK entries,stop 1.0 ATR,50,36.0,-1632,-32.6,0.59,500,-460,-1172,24,26
+PLAYBOOK entries,stop 1.5 ATR,49,40.8,-1592,-32.5,0.7,501,-298,-1294,24,25
+PLAYBOOK entries,stop 2.0 ATR,49,44.9,-144,-2.9,0.97,1955,447,-592,24,25
+PLAYBOOK entries,stop OR far side,49,42.9,-1598,-32.6,0.77,433,776,-2374,24,25
+PLAYBOOK entries,VWAP close stop,49,36.7,-850,-17.4,0.82,1226,396,-1246,24,25
+PLAYBOOK entries,floor + T1 1.0R,50,42.0,-2393,-47.9,0.47,-252,-1046,-1347,24,26
+PLAYBOOK entries,floor + T1 2.0R,50,32.0,-2501,-50.0,0.54,-391,-695,-1806,24,26
+PLAYBOOK entries,"floor + no partial, 1.5R target",52,42.3,-754,-14.5,0.84,1377,-269,-485,24,28
+PLAYBOOK entries,"floor + no partial, 2R target",52,32.7,-1839,-35.4,0.68,291,-455,-1384,24,28
+PLAYBOOK entries,floor + VWAP-close trail only,50,28.0,-2589,-51.8,0.47,-542,-179,-2410,24,26
+PLAYBOOK entries,floor + time stop 30m,50,40.0,-1322,-26.4,0.67,810,-254,-1069,24,26
+PLAYBOOK entries,stop 1.5ATR + time stop 30m,49,34.7,-1641,-33.5,0.66,439,-77,-1564,24,25
+RVOL>=1.5 entries,"v1 (rule stop, T1 1.5R, 9EMA trail)",533,30.6,-25234,-47.3,0.47,-2573,-14169,-11065,273,260
+RVOL>=1.5 entries,stop floor 1ATR/0.4%,501,38.5,-21399,-42.7,0.61,-106,-12412,-8987,255,246
+RVOL>=1.5 entries,stop 1.0 ATR,526,40.1,-21074,-40.1,0.54,1369,-10121,-10953,266,260
+RVOL>=1.5 entries,stop 1.5 ATR,492,40.0,-20038,-40.7,0.65,883,-11777,-8262,252,240
+RVOL>=1.5 entries,stop 2.0 ATR,468,39.1,-22509,-48.1,0.65,-2682,-14639,-7870,243,225
+RVOL>=1.5 entries,stop OR far side,453,42.4,-15028,-33.2,0.8,3783,-8035,-6993,235,218
+RVOL>=1.5 entries,VWAP close stop,481,31.6,-21722,-45.2,0.62,-1471,-13339,-8383,245,236
+RVOL>=1.5 entries,floor + T1 1.0R,513,46.4,-23079,-45.0,0.52,-1044,-11828,-11252,262,251
+RVOL>=1.5 entries,floor + T1 2.0R,496,33.1,-21613,-43.6,0.63,-704,-13003,-8609,254,242
+RVOL>=1.5 entries,"floor + no partial, 1.5R target",545,39.3,-22639,-41.5,0.62,-333,-12778,-9861,272,273
+RVOL>=1.5 entries,"floor + no partial, 2R target",526,32.9,-23397,-44.5,0.62,-1866,-13295,-10101,263,263
+RVOL>=1.5 entries,floor + VWAP-close trail only,494,23.9,-14992,-30.3,0.73,5235,-9028,-5965,252,242
+RVOL>=1.5 entries,floor + time stop 30m,516,34.9,-21875,-42.4,0.57,-36,-13028,-8847,262,254
+RVOL>=1.5 entries,stop 1.5ATR + time stop 30m,505,34.3,-22858,-45.3,0.58,-1511,-12505,-10353,259,246

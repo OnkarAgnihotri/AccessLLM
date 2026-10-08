@@ -24,6 +24,8 @@
 > 3. **Even the best variant lost money.** It also had only 27 trades, too few to trust either way.
 >
 > **Do not trade this live.** A real verdict needs years of 5-minute data (Dhan/Kite export).
+>
+> **Update: see `research/LOSS_ANALYSIS.md` for why v1 lost and the v2 rules** (narrow CPR, 5-minute ATR ≥ 0.4%, 2 × ATR stop): +₹3,659 over 58 trades at ₹25,000 per trade on the same data. It is still a hypothesis until tested on longer data.
 
 ## 0. Read this first: what our own data already says
 
