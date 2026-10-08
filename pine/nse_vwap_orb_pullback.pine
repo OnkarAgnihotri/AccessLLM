@@ -1,0 +1,364 @@
+//@version=5
+// =====================================================================================
+// NSE Intraday: 15m ORB + VWAP Pullback (5-minute chart)
+// Companion to research/INTRADAY_PLAYBOOK.md. Use on a 5-minute chart of an NSE F&O stock.
+//
+// Setup A: 15m Opening Range Breakout (09:30-11:30) on a closed candle above ORH / below ORL,
+//          on the right side of a sloping VWAP, with a 9/21 EMA stack, RSI 60-80 (20-40), volume
+//          surge, opening RVol, RS vs index, daily trend and a non-wide CPR.
+// Setup B: VWAP pullback (09:45-11:30 and 13:30-14:45) in an established trend day: low tags VWAP,
+//          hammer/engulfing (shooting star/engulfing) rejection, RSI holds 45-55 and turns.
+//          Entry by stop order beyond the signal candle, valid 2 bars.
+// Exits:   50% at T1 (1.5R), then stop to cost +0.1%, runner trailed on a 5m close vs 9 EMA.
+// Risk:    qty = equity * risk% / |entry - stop|; daily stop -2R or 2 consecutive losses;
+//          max trades/day; no entries 11:30-13:30; hard square-off at 15:10.
+//
+// Not compiled or verified in TradingView yet - expect minor fixes. Index symbols have no volume
+// in TradingView, so index direction uses the index 21 EMA instead of index VWAP.
+// =====================================================================================
+strategy("NSE VWAP ORB + Pullback (5m)", overlay=true, pyramiding=0,
+     initial_capital=500000, currency=currency.INR,
+     commission_type=strategy.commission.percent, commission_value=0.04,   // per side, ~0.08% round trip
+     slippage=2, calc_on_every_tick=false, process_orders_on_close=false)
+
+// ----------------------------------------------------------------------------- inputs
+grpR = "Risk"
+riskPct    = input.float(0.5, "Risk per trade (% equity)", minval=0.1, maxval=2.0, step=0.1, group=grpR)
+maxDayR    = input.float(2.0, "Daily stop (R)", minval=0.5, group=grpR)
+maxConsec  = input.int(2, "Halt after N consecutive losing trades", minval=1, group=grpR)
+maxTrades  = input.int(5, "Max trades per day", minval=1, group=grpR)
+t1R        = input.float(1.5, "Target 1 (R) - book 50%", minval=0.5, group=grpR)
+minRoomR   = input.float(2.0, "Required room to next level (R)", minval=1.0, group=grpR)
+maxLev     = input.float(3.0, "Max position value / equity", minval=1.0, group=grpR)
+
+grpF = "Filters"
+useA       = input.bool(true, "Setup A: 15m ORB", group=grpF)
+useB       = input.bool(true, "Setup B: VWAP pullback", group=grpF)
+allowLong  = input.bool(true, "Longs", group=grpF)
+allowShort = input.bool(true, "Shorts", group=grpF)
+rvolMin    = input.float(1.5, "Opening RVol min (09:15-09:30 vs 20-day avg)", minval=0.0, group=grpF)
+idxSym     = input.symbol("NSE:NIFTY", "Benchmark (or sector index, e.g. NSE:BANKNIFTY)", group=grpF)
+useRS      = input.bool(true, "Require RS/RW vs benchmark", group=grpF)
+useIdxBias = input.bool(true, "Require benchmark on same side of its 21 EMA", group=grpF)
+useDaily   = input.bool(true, "Require daily EMA 20/50 trend", group=grpF)
+cprWideMax = input.float(0.6, "Skip ORB if CPR width % >", minval=0.0, group=grpF)
+volMult    = input.float(1.5, "Signal candle volume vs 20-bar avg", minval=0.0, group=grpF)
+
+grpS = "Sessions (IST)"
+orWin  = input.session("0915-0930", "Opening range", group=grpS)
+amWin  = input.session("0930-1130", "Primary window", group=grpS)
+pmWin  = input.session("1330-1445", "Secondary window (pullbacks only)", group=grpS)
+flatW  = input.session("1510-1530", "Square-off", group=grpS)
+TZ = "Asia/Kolkata"
+
+inSess(s) => not na(time(timeframe.period, s, TZ))
+
+// ----------------------------------------------------------------------------- day bookkeeping
+isNewDay = ta.change(time("D")) != 0
+inOR  = inSess(orWin)
+inAM  = inSess(amWin)
+inPM  = inSess(pmWin)
+inFlat = inSess(flatW)
+
+// ----------------------------------------------------------------------------- indicators (5m)
+ema9  = ta.ema(close, 9)
+ema21 = ta.ema(close, 21)
+rsi   = ta.rsi(close, 14)
+atr   = ta.atr(14)
+volAvg = ta.sma(volume, 20)
+
+// session VWAP with standard-deviation bands
+var float sV = 0.0
+var float sPV = 0.0
+var float sPV2 = 0.0
+if isNewDay
+    sV := 0.0
+    sPV := 0.0
+    sPV2 := 0.0
+sV += volume
+sPV += hlc3 * volume
+sPV2 += hlc3 * hlc3 * volume
+sVwap = sV > 0 ? sPV / sV : hlc3
+sd   = sV > 0 ? math.sqrt(math.max(sPV2 / sV - sVwap * sVwap, 0.0)) : 0.0
+up1 = sVwap + sd
+dn1 = sVwap - sd
+up2 = sVwap + 2 * sd
+dn2 = sVwap - 2 * sd
+
+// ----------------------------------------------------------------------------- opening range + RVol
+var float orH = na
+var float orL = na
+var float orVol = 0.0
+var float rvol = na
+var orHist = array.new_float()
+if isNewDay
+    orH := na
+    orL := na
+    orVol := 0.0
+    rvol := na
+if inOR
+    orH := na(orH) ? high : math.max(orH, high)
+    orL := na(orL) ? low : math.min(orL, low)
+    orVol += volume
+orDone = not inOR and not na(orH)
+orMid  = (orH + orL) / 2
+if orDone and not orDone[1]
+    avgOR = array.size(orHist) > 0 ? array.avg(orHist) : na
+    rvol := na(avgOR) or avgOR == 0 ? na : orVol / avgOR
+    array.push(orHist, orVol)
+    if array.size(orHist) > 20
+        array.shift(orHist)
+rvolOK = rvolMin <= 0 or (not na(rvol) and rvol >= rvolMin)
+
+// ----------------------------------------------------------------------------- daily references (no repaint)
+[pdc, pdh, pdl, dE20, dE50, dATR] = request.security(syminfo.tickerid, "D",
+     [close[1], high[1], low[1], ta.ema(close, 20)[1], ta.ema(close, 50)[1], ta.atr(14)[1]],
+     lookahead=barmerge.lookahead_on)
+dailyUp = not useDaily or (pdc > dE20 and dE20 > dE50)
+dailyDn = not useDaily or (pdc < dE20 and dE20 < dE50)
+
+// CPR from yesterday
+pivot = (pdh + pdl + pdc) / 3
+bc    = (pdh + pdl) / 2
+tc    = 2 * pivot - bc
+cprW  = math.abs(tc - bc) / pivot * 100
+r1    = 2 * pivot - pdl
+s1    = 2 * pivot - pdh
+cprOK = cprW <= cprWideMax
+
+// ----------------------------------------------------------------------------- benchmark RS / bias
+idxC   = request.security(idxSym, timeframe.period, close)
+idxO   = request.security(idxSym, timeframe.period, open)
+idxE21 = request.security(idxSym, timeframe.period, ta.ema(close, 21))
+var float dayOpen = na
+var float idxDayOpen = na
+if isNewDay
+    dayOpen := open
+    idxDayOpen := idxO
+stkRet = close / dayOpen - 1
+idxRet = idxC / idxDayOpen - 1
+rsLong  = not useRS or (stkRet > 0 and stkRet > idxRet)
+rsShort = not useRS or (stkRet < 0 and stkRet < idxRet)
+idxBull = not useIdxBias or idxC > idxE21
+idxBear = not useIdxBias or idxC < idxE21
+
+// ----------------------------------------------------------------------------- trend-day state (for Setup B)
+var int barsToday = 0
+var int barsAbove = 0
+var bool tagUp1 = false
+var bool tagDn1 = false
+if isNewDay
+    barsToday := 0
+    barsAbove := 0
+    tagUp1 := false
+    tagDn1 := false
+barsToday += 1
+barsAbove += close > sVwap ? 1 : 0
+tagUp1 := tagUp1 or high > up1
+tagDn1 := tagDn1 or low < dn1
+shareAbove = barsAbove / math.max(barsToday, 1)
+
+// ----------------------------------------------------------------------------- candles
+body     = math.abs(close - open)
+rng      = math.max(high - low, syminfo.mintick)
+hammer   = (math.min(open, close) - low) >= 2 * body and close >= low + rng * 2 / 3
+star     = (high - math.max(open, close)) >= 2 * body and close <= high - rng * 2 / 3
+bullEng  = close > open and close[1] < open[1] and close >= open[1] and open <= close[1] and volume > volAvg
+bearEng  = close < open and close[1] > open[1] and close <= open[1] and open >= close[1] and volume > volAvg
+volSurge = volume >= volMult * volAvg
+
+// ----------------------------------------------------------------------------- risk state
+var float dayStartEq = na
+var int dayTrades = 0
+var int consecLoss = 0
+var float netAtOpen = 0.0
+if isNewDay
+    dayStartEq := strategy.equity
+    dayTrades := 0
+    consecLoss := 0
+riskRs = nz(dayStartEq, strategy.initial_capital) * riskPct / 100
+opened = strategy.position_size != 0 and nz(strategy.position_size[1]) == 0
+closed = strategy.position_size == 0 and nz(strategy.position_size[1]) != 0
+if opened
+    netAtOpen := nz(strategy.netprofit[1])
+    dayTrades += 1
+if closed
+    consecLoss := strategy.netprofit - netAtOpen < 0 ? consecLoss + 1 : 0
+halted = (strategy.equity - nz(dayStartEq, strategy.equity)) <= -maxDayR * riskRs or consecLoss >= maxConsec
+canEnter = strategy.position_size == 0 and not halted and dayTrades < maxTrades and not inFlat
+
+// ----------------------------------------------------------------------------- setup A: ORB
+aLong = useA and allowLong and inAM and orDone and close > orH + 0.1 * atr and close > sVwap and sVwap > sVwap[3]
+     and ema9 > ema21 and rsi >= 60 and rsi <= 80 and volSurge and close < up2
+     and rvolOK and rsLong and idxBull and dailyUp and cprOK
+aShort = useA and allowShort and inAM and orDone and close < orL - 0.1 * atr and close < sVwap and sVwap < sVwap[3]
+     and ema9 < ema21 and rsi <= 40 and rsi >= 20 and volSurge and close > dn2
+     and rvolOK and rsShort and idxBear and dailyDn and cprOK
+aLongStop  = math.max(low - 0.1 * atr, orMid)
+aShortStop = math.min(high + 0.1 * atr, orMid)
+
+// ----------------------------------------------------------------------------- setup B: VWAP pullback
+bWin = (inAM and barsToday >= 7) or inPM          // from 09:45
+rsiHeldUp = ta.lowest(rsi, 4) >= 45 and rsi > rsi[1]
+rsiHeldDn = ta.highest(rsi, 4) <= 55 and rsi < rsi[1]
+bLong = useB and allowLong and bWin and shareAbove >= 0.7 and tagUp1 and ema9 > ema21
+     and low <= sVwap + 0.1 * atr and close > sVwap and (hammer or bullEng) and rsiHeldUp
+     and volume < ta.highest(volume, 10) and close < up2 and rvolOK and rsLong and idxBull
+bShort = useB and allowShort and bWin and shareAbove <= 0.3 and tagDn1 and ema9 < ema21
+     and high >= sVwap - 0.1 * atr and close < sVwap and (star or bearEng) and rsiHeldDn
+     and volume < ta.highest(volume, 10) and close > dn2 and rvolOK and rsShort and idxBear
+
+// ----------------------------------------------------------------------------- planning helpers
+roomLong(entry, R) =>
+    lvl = pdh > entry ? pdh : (r1 > entry ? r1 : up2)
+    lvl - entry >= minRoomR * R or lvl <= entry
+roomShort(entry, R) =>
+    lvl = pdl < entry ? pdl : (s1 < entry ? s1 : dn2)
+    entry - lvl >= minRoomR * R or lvl >= entry
+qtyFor(entry, R) =>
+    q = math.floor(riskRs / R)
+    math.min(q, math.floor(maxLev * strategy.equity / entry))
+
+var float pEntry = na
+var float pStop = na
+var float pT1 = na
+var bool t1Done = false
+var int pendingBars = 0
+var int pendingSide = 0
+
+// ----------------------------------------------------------------------------- entries
+if canEnter and not na(atr)
+    if aLong
+        R = close - aLongStop
+        if R > 0 and R <= 1.2 * dATR / 4 and roomLong(close, R)
+            q = qtyFor(close, R)
+            if q >= 1
+                pEntry := close
+                pStop := aLongStop
+                pT1 := close + t1R * R
+                t1Done := false
+                strategy.entry("L", strategy.long, qty=q, comment="A-ORB L")
+    else if aShort
+        R = aShortStop - close
+        if R > 0 and R <= 1.2 * dATR / 4 and roomShort(close, R)
+            q = qtyFor(close, R)
+            if q >= 1
+                pEntry := close
+                pStop := aShortStop
+                pT1 := close - t1R * R
+                t1Done := false
+                strategy.entry("S", strategy.short, qty=q, comment="A-ORB S")
+    else if bLong
+        e = high + syminfo.mintick
+        st = low - 0.1 * atr
+        R = e - st
+        if R > 0 and R <= 3 * atr and roomLong(e, R)
+            q = qtyFor(e, R)
+            if q >= 1
+                pEntry := e
+                pStop := st
+                pT1 := e + t1R * R
+                t1Done := false
+                pendingBars := 3                       // live for the next 2 bars
+                pendingSide := 1
+                strategy.entry("L", strategy.long, qty=q, stop=e, comment="B-VWAP L")
+    else if bShort
+        e = low - syminfo.mintick
+        st = high + 0.1 * atr
+        R = st - e
+        if R > 0 and R <= 3 * atr and roomShort(e, R)
+            q = qtyFor(e, R)
+            if q >= 1
+                pEntry := e
+                pStop := st
+                pT1 := e - t1R * R
+                t1Done := false
+                pendingBars := 3
+                pendingSide := -1
+                strategy.entry("S", strategy.short, qty=q, stop=e, comment="B-VWAP S")
+
+// cancel an unfilled Setup B stop order after 2 bars, or once price closes back through VWAP
+if strategy.position_size == 0 and pendingBars > 0
+    pendingBars -= 1
+    lostVwap = (pendingSide == 1 and close < sVwap) or (pendingSide == -1 and close > sVwap)
+    if pendingBars == 0 or lostVwap
+        strategy.cancel(pendingSide == 1 ? "L" : "S")
+        pendingBars := 0
+        pendingSide := 0
+
+// ----------------------------------------------------------------------------- exits
+if strategy.position_size != 0 and math.abs(strategy.position_size) < math.abs(nz(strategy.position_size[1])) and nz(strategy.position_size[1]) != 0
+    t1Done := true                                     // first target filled
+if opened
+    pendingBars := 0
+    pendingSide := 0
+
+beLong  = math.max(pStop, pEntry * 1.001)
+beShort = math.min(pStop, pEntry * 0.999)
+
+// exits are (re)issued every bar, including the signal bar, so they are live as soon as the entry fills
+if not na(pStop)
+    if not t1Done
+        strategy.exit("L-T1", "L", qty_percent=50, limit=pT1, stop=pStop, comment_profit="T1", comment_loss="SL")
+        strategy.exit("L-RUN", "L", stop=pStop, comment_loss="SL")
+        strategy.exit("S-T1", "S", qty_percent=50, limit=pT1, stop=pStop, comment_profit="T1", comment_loss="SL")
+        strategy.exit("S-RUN", "S", stop=pStop, comment_loss="SL")
+    else
+        strategy.exit("L-RUN", "L", stop=beLong, comment_loss="BE")
+        strategy.exit("S-RUN", "S", stop=beShort, comment_loss="BE")
+
+// runner trail: first 5m close through the 9 EMA after T1, or a 2-sigma exhaustion print
+if strategy.position_size > 0 and t1Done and (close < ema9 or high >= up2)
+    strategy.close("L", comment=close < ema9 ? "9EMA trail" : "2σ exhaust")
+if strategy.position_size < 0 and t1Done and (close > ema9 or low <= dn2)
+    strategy.close("S", comment=close > ema9 ? "9EMA trail" : "2σ exhaust")
+
+// hard square-off
+if inFlat
+    strategy.cancel_all()
+    strategy.close_all(comment="15:10 flat")
+
+// ----------------------------------------------------------------------------- visuals
+plot(sVwap, "VWAP", color.orange, 2)
+plot(up1, "+1σ", color.new(color.orange, 60))
+plot(dn1, "-1σ", color.new(color.orange, 60))
+plot(up2, "+2σ", color.new(color.red, 50))
+plot(dn2, "-2σ", color.new(color.green, 50))
+plot(ema9, "EMA 9", color.aqua)
+plot(ema21, "EMA 21", color.blue)
+plot(orDone ? orH : na, "ORH", color.lime, 1, plot.style_linebr)
+plot(orDone ? orL : na, "ORL", color.red, 1, plot.style_linebr)
+plot(pdh, "PDH", color.new(color.gray, 30), 1, plot.style_stepline)
+plot(pdl, "PDL", color.new(color.gray, 30), 1, plot.style_stepline)
+plot(tc, "CPR TC", color.new(color.purple, 50), 1, plot.style_stepline)
+plot(bc, "CPR BC", color.new(color.purple, 50), 1, plot.style_stepline)
+plotshape(aLong and canEnter, "A long", shape.triangleup, location.belowbar, color.lime, size=size.tiny)
+plotshape(aShort and canEnter, "A short", shape.triangledown, location.abovebar, color.red, size=size.tiny)
+plotshape(bLong and canEnter, "B long", shape.circle, location.belowbar, color.green, size=size.tiny)
+plotshape(bShort and canEnter, "B short", shape.circle, location.abovebar, color.maroon, size=size.tiny)
+bgcolor(halted ? color.new(color.red, 90) : na, title="Halted for the day")
+
+var table info = table.new(position.top_right, 2, 6, border_width=1)
+if barstate.islast
+    table.cell(info, 0, 0, "RVol", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 0, na(rvol) ? "-" : str.tostring(rvol, "#.##") + "x")
+    table.cell(info, 0, 1, "CPR %", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 1, str.tostring(cprW, "#.##") + (cprOK ? "" : " wide"))
+    table.cell(info, 0, 2, "RS vs idx %", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 2, str.tostring((stkRet - idxRet) * 100, "#.##"))
+    table.cell(info, 0, 3, "Daily", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 3, dailyUp ? "up" : dailyDn ? "down" : "mixed")
+    table.cell(info, 0, 4, "Trades / losses", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 4, str.tostring(dayTrades) + " / " + str.tostring(consecLoss))
+    table.cell(info, 0, 5, "Status", text_color=color.white, bgcolor=color.gray)
+    table.cell(info, 1, 5, halted ? "HALTED" : "active")
+
+// alerts for a live desk (create one alert on "Any alert() function call")
+if aLong and canEnter
+    alert(syminfo.ticker + " A-ORB LONG close " + str.tostring(close), alert.freq_once_per_bar_close)
+if aShort and canEnter
+    alert(syminfo.ticker + " A-ORB SHORT close " + str.tostring(close), alert.freq_once_per_bar_close)
+if bLong and canEnter
+    alert(syminfo.ticker + " B-VWAP LONG trigger " + str.tostring(high), alert.freq_once_per_bar_close)
+if bShort and canEnter
+    alert(syminfo.ticker + " B-VWAP SHORT trigger " + str.tostring(low), alert.freq_once_per_bar_close)
