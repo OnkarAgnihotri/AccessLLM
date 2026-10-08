@@ -1,0 +1,5 @@
+strategy,name,start,end,final,total_ret,cagr,max_dd,sharpe,nifty_ret,ew_universe_ret,exposure,trades,win,avg_win,avg_loss,avg_trade,pf,avg_days,charges_note
+S1,Momentum breakout,2021-08-02,2024-06-28,817610,63.5,18.4,-24.6,0.87,51.2,163.3,74.9,445,40.4,14.06,-7.32,1.33,1.28,12.5,included
+S2,Trend pullback,2021-08-02,2024-06-28,803645,60.7,17.7,-31.0,0.91,51.2,163.3,76.5,541,35.1,13.02,-5.35,1.1,1.31,10.9,included
+S3,Weekly momentum rotation,2021-08-02,2024-06-28,808979,61.8,18.0,-27.6,0.87,51.2,163.3,67.5,344,47.1,15.26,-10.2,1.79,1.27,14.6,included
+S4,Squeeze breakout,2021-08-02,2024-06-28,438611,-12.3,-4.4,-33.6,-0.15,51.2,163.3,71.3,456,34.4,10.99,-6.07,-0.2,0.92,11.6,included
