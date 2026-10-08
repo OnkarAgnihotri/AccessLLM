@@ -143,7 +143,17 @@ def metrics(rec):
     m["rev_cagr"] = ((g(rev, 0) / g(rev, k)) ** (1 / k) - 1) * 100 if k >= 1 and g(rev, k) and g(rev, k) > 0 and g(rev, 0) > 0 else np.nan
     m["np_cagr"] = ((g(ni, 0) / g(ni, k)) ** (1 / k) - 1) * 100 if k >= 1 and g(ni, k) and g(ni, k) > 0 and g(ni, 0) > 0 else np.nan
     m["rev_growth_1y"] = (g(rev, 0) / g(rev, 1) - 1) * 100 if g(rev, 1) and g(rev, 1) > 0 else np.nan
-    m["de"] = g(debt, 0) / g(eq, 0) if g(eq, 0) and g(eq, 0) > 0 and np.isfinite(g(debt, 0)) else (np.nan if not len(eq) else np.inf if g(eq, 0) <= 0 else 0.0)
+    if len(eq) and np.isfinite(g(eq, 0)) and g(eq, 0) <= 0:
+        m["de"] = np.inf
+    elif np.isfinite(g(debt, 0)) and g(eq, 0) and g(eq, 0) > 0:
+        m["de"] = g(debt, 0) / g(eq, 0)
+    elif i.get("debtToEquity") is not None:                      # Yahoo reports D/E in percent
+        m["de"] = i["debtToEquity"] / 100
+    elif i.get("totalDebt") is not None and g(eq, 0) and g(eq, 0) > 0:
+        m["de"] = i["totalDebt"] / g(eq, 0)
+    else:
+        m["de"] = np.nan                                           # unknown, never assumed zero
+    m["de_source"] = "statement" if np.isfinite(g(debt, 0)) else ("info" if i.get("debtToEquity") is not None else "unknown")
     m["int_cover"] = g(ebit, 0) / abs(g(intr, 0)) if g(intr, 0) else np.nan
     m["current_ratio"] = g(ca, 0) / g(cl, 0) if g(cl, 0) else np.nan
     s_ocf, s_ni = np.nansum(ocf[:3]) if len(ocf) else np.nan, np.nansum(ni[:3]) if len(ni) else np.nan
@@ -248,7 +258,7 @@ def main():
 
     # ------------------------------------------------------------- step 5 selection, relaxing liquidity first
     base = D.f_exchange_data & D.f_listing_3y & D.f_fundamentals & D.f_mcap & D.f_price & D.red_flags.eq("")
-    tiers = [(20, 2e5), (10, 1e5), (5, 5e4), (3, 5e4), (2, 2.5e4)]
+    tiers = [(20, 2e5), (10, 1e5), (5, 5e4), (3, 5e4), (2, 2.5e4), (1, 1e4)]   # Rs 1 cr = intraday floor
     funnel = [("candidates (597 removed)", len(D)), ("NSE with price data", int(D.f_exchange_data.sum())),
               ("+ listed >= 3 years", int((D.f_exchange_data & D.f_listing_3y).sum())),
               ("+ 3y fundamentals available", int((D.f_exchange_data & D.f_listing_3y & D.f_fundamentals).sum())),
@@ -265,18 +275,26 @@ def main():
         chosen_tier = tiers[-1]
     t, v = chosen_tier
     P = D[base & (D.turn20_cr >= t) & (D.vol20 >= v)].sort_values("final_score", ascending=False)
-    cap = 60                                                     # 12% of 500 per sector
-    picked, per = [], {}
-    for idx, r in P.iterrows():
-        if per.get(r.yahoo_sector, 0) >= cap:
-            continue
-        picked.append(idx)
-        per[r.yahoo_sector] = per.get(r.yahoo_sector, 0) + 1
-        if len(picked) == 500:
+    # 12% cap per industry (Yahoo's 11 broad sectors are too coarse for a 12% cap + 15-sector rule), on the final size (iterate until the size is stable)
+    target = min(500, len(P))
+    for _ in range(10):
+        cap = max(1, int(0.12 * target))
+        picked, per = [], {}
+        for idx, r in P.iterrows():
+            if per.get(r.yahoo_industry, 0) >= cap:
+                continue
+            picked.append(idx)
+            per[r.yahoo_industry] = per.get(r.yahoo_industry, 0) + 1
+            if len(picked) == 500:
+                break
+        if len(picked) == target:
             break
+        target = len(picked)
+    print("industry cap", cap, "names")
     U = D.loc[picked].copy()
     U["mcap_bucket"] = pd.cut(U.mcap_cr, [0, 30000, 100000, np.inf], labels=["small (<30k cr)", "mid (30k-1L cr)", "large (>1L cr)"])
-    U["liquidity_tier"] = np.select([U.turn20_cr >= 20, U.turn20_cr >= 10, U.turn20_cr >= 5], ["T1 >=20cr", "T2 10-20cr", "T3 5-10cr"], "T4 <5cr")
+    U["liquidity_tier"] = np.select([U.turn20_cr >= 20, U.turn20_cr >= 10, U.turn20_cr >= 5, U.turn20_cr >= 2],
+                                    ["T1 >=20cr", "T2 10-20cr", "T3 5-10cr", "T4 2-5cr"], "T5 1-2cr")
     U["rank"] = range(1, len(U) + 1)
     cols = ["rank", "symbol", "exchange", "company", "yahoo_sector", "yahoo_industry", "mcap_cr", "mcap_bucket", "price", "turn20_cr",
             "liquidity_tier", "final_score", "quality", "governance", "policy", "s_profit", "s_growth", "s_balance", "s_cash", "s_value",
@@ -289,6 +307,7 @@ def main():
     print(pd.DataFrame(funnel, columns=["step", "stocks"]).to_string(index=False))
     print("liquidity tier used:", chosen_tier, "| selected", len(U))
     print(U.yahoo_sector.value_counts().to_string())
+    print('industries:', U.yahoo_industry.nunique())
     print(U.mcap_bucket.value_counts().to_string())
     print(U.liquidity_tier.value_counts().to_string())
     print(U.policy_theme.replace("", "none").value_counts().to_string())

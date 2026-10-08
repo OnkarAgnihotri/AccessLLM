@@ -63,6 +63,10 @@ def daily_refs(path):
 def prepare(sym, a, idx):
     d = load(os.path.join(a.data, "5m", f"{sym}.csv"))
     d = d[(d.index.time >= pd.Timestamp("09:15").time()) & (d.index.time <= pd.Timestamp("15:25").time())]
+    if getattr(a, "start", ""):
+        d = d[d.index >= pd.Timestamp(a.start)]
+    if getattr(a, "end", ""):
+        d = d[d.index < pd.Timestamp(a.end) + pd.Timedelta(days=1)]
     d["day"] = d.index.normalize()
     d["t"] = d.index.hour * 100 + d.index.minute
     d["ema9"], d["ema21"] = ema(d.Close, 9), ema(d.Close, 21)
@@ -333,6 +337,8 @@ def main():
     ap.add_argument("--v2", action="store_true", help="v2 preset (research/LOSS_ANALYSIS.md)")
     ap.add_argument("--veto-htf", action="store_true", help="v3 veto O3: skip trades against the daily/weekly trend")
     ap.add_argument("--v3", action="store_true", help="v3 preset = v2 + veto O3 (research/TRADE_REVIEW.md)")
+    ap.add_argument("--start", default="", help="first day of 5m data to use (YYYY-MM-DD)")
+    ap.add_argument("--end", default="", help="last day of 5m data to use (YYYY-MM-DD)")
     ap.add_argument("--max-open", type=int, default=3)
     ap.add_argument("--max-trades", type=int, default=5)
     ap.add_argument("--day-stop-r", type=float, default=2.0)
