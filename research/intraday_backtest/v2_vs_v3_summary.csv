@@ -1,0 +1,3 @@
+Version,Trades,Win %,Gross Rs,Charges Rs,Net Rs,Avg win Rs,Avg loss Rs,Profit factor,Max drawdown Rs (trade sequence),Net 16 Jul-1 Sep,Net 2 Sep-7 Oct,Best 3 share %
+v2,58,56.9,6159,2500,3659,357,-325,1.45,-2632,2409,1249,65
+v3 = v2 + O3 veto,34,67.6,5559,1482,4077,351,-363,2.02,-1440,1365,2712,53

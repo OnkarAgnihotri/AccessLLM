@@ -48,8 +48,15 @@ def daily_refs(path):
     c = d.Close
     tr = pd.concat([d.High - d.Low, (d.High - c.shift()).abs(), (d.Low - c.shift()).abs()], axis=1).max(axis=1)
     r = pd.DataFrame({"pdc": c, "pdh": d.High, "pdl": d.Low, "e20": ema(c, 20), "e50": ema(c, 50),
-                      "datr": tr.ewm(alpha=1 / 14, adjust=False).mean()}).shift(1)   # yesterday's values
+                      "e200": ema(c, 200), "datr": tr.ewm(alpha=1 / 14, adjust=False).mean()}).shift(1)   # yesterday's values
     r.index = r.index.normalize()
+    # weekly trend known before the open: last close vs the 20-week EMA, built from days before today
+    wdiff = pd.Series(np.nan, index=r.index)
+    for k in range(max(len(d) - 150, 30), len(d)):
+        w = c.iloc[:k].resample("W-FRI").last().dropna()
+        if len(w) >= 22:
+            wdiff.iat[k] = w.iloc[-1] - ema(w, 20).iloc[-1]
+    r["wdiff"] = wdiff.values
     return r
 
 
@@ -113,14 +120,18 @@ def signals(d, a):
     beng = (c > o) & (c.shift() < o.shift()) & (c >= o.shift()) & (o <= c.shift()) & (d.Volume > d.volavg)
     seng = (c < o) & (c.shift() > o.shift()) & (c <= o.shift()) & (o >= c.shift()) & (d.Volume > d.volavg)
     vw_up, vw_dn = d.vwap > d.vwap.shift(3), d.vwap < d.vwap.shift(3)
-    d["aL"] = a.use_a & am & (c > d.orh + 0.1 * d.atr) & (c > d.vwap) & vw_up & (d.ema9 > d.ema21) & d.rsi.between(60, 80) \
+    # v3 veto O3: no trade against the higher-timeframe trend (daily EMA stack net against, or wrong side of 20w EMA)
+    dscore = np.sign(d.pdc - d.e20) + np.sign(d.e20 - d.e50) + np.sign(d.e50 - d.e200)
+    htf_l = ~((dscore <= -1) | (d.wdiff < 0)) if a.veto_htf else True
+    htf_s = ~((-dscore <= -1) | (d.wdiff > 0)) if a.veto_htf else True
+    d["aL"] = a.use_a & am & htf_l & (c > d.orh + 0.1 * d.atr) & (c > d.vwap) & vw_up & (d.ema9 > d.ema21) & d.rsi.between(60, 80) \
         & vsurge & (c < d.up2) & rvol_ok & rs_l & ib & du & cpr_ok
-    d["aS"] = a.use_a & am & (c < d.orl - 0.1 * d.atr) & (c < d.vwap) & vw_dn & (d.ema9 < d.ema21) & d.rsi.between(20, 40) \
+    d["aS"] = a.use_a & am & htf_s & (c < d.orl - 0.1 * d.atr) & (c < d.vwap) & vw_dn & (d.ema9 < d.ema21) & d.rsi.between(20, 40) \
         & vsurge & (c > d.dn2) & rvol_ok & rs_s & ibr & dd & cpr_ok
     bwin = (am & (d.bar_n >= 7)) | pm
-    d["bL"] = a.use_b & bwin & b_ok & (d.above >= 0.7) & d.tag_up1 & (d.ema9 > d.ema21) & (l <= d.vwap + 0.1 * d.atr) & (c > d.vwap) \
+    d["bL"] = a.use_b & bwin & b_ok & htf_l & (d.above >= 0.7) & d.tag_up1 & (d.ema9 > d.ema21) & (l <= d.vwap + 0.1 * d.atr) & (c > d.vwap) \
         & (hammer | beng) & (d.rsi_lo4 >= 45) & (d.rsi > d.rsi.shift()) & (d.Volume < d.vol_hi10) & (c < d.up2) & rvol_ok & rs_l & ib
-    d["bS"] = a.use_b & bwin & b_ok & (d.above <= 0.3) & d.tag_dn1 & (d.ema9 < d.ema21) & (h >= d.vwap - 0.1 * d.atr) & (c < d.vwap) \
+    d["bS"] = a.use_b & bwin & b_ok & htf_s & (d.above <= 0.3) & d.tag_dn1 & (d.ema9 < d.ema21) & (h >= d.vwap - 0.1 * d.atr) & (c < d.vwap) \
         & (star | seng) & (d.rsi_hi4 <= 55) & (d.rsi < d.rsi.shift()) & (d.Volume < d.vol_hi10) & (c > d.dn2) & rvol_ok & rs_s & ibr
     for k in ("aL", "aS", "bL", "bS"):
         d[k] = d[k].fillna(False).astype(bool)
@@ -320,10 +331,14 @@ def main():
     ap.add_argument("--min-atr-pct", type=float, default=0.0, help="v2: skip stocks whose 5m ATR is below this %% of price")
     ap.add_argument("--cpr-on-b", action="store_true", help="v2: apply the CPR/ATR filter to setup B too")
     ap.add_argument("--v2", action="store_true", help="v2 preset (research/LOSS_ANALYSIS.md)")
+    ap.add_argument("--veto-htf", action="store_true", help="v3 veto O3: skip trades against the daily/weekly trend")
+    ap.add_argument("--v3", action="store_true", help="v3 preset = v2 + veto O3 (research/TRADE_REVIEW.md)")
     ap.add_argument("--max-open", type=int, default=3)
     ap.add_argument("--max-trades", type=int, default=5)
     ap.add_argument("--day-stop-r", type=float, default=2.0)
     a = ap.parse_args()
+    if a.v3:
+        a.v2 = a.veto_htf = True
     if a.v2:
         a.rs = a.idx_bias = a.daily = False
         a.cpr_max, a.min_atr_pct, a.stop_atr, a.room, a.cpr_on_b = 0.25, 0.4, 2.0, 0.0, True
