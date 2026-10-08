@@ -1,0 +1,14 @@
+step,stocks
+candidates (597 removed),3419
+NSE with price data,1727
++ listed >= 3 years,1189
++ 3y fundamentals available,577
+"+ market cap >= Rs 1,000 cr",525
+"+ price Rs 50-15,000",525
++ no red flags,434
+"+ liquidity >= Rs 20 cr & 200,000 shares",62
+"+ liquidity >= Rs 10 cr & 100,000 shares",124
+"+ liquidity >= Rs 5 cr & 50,000 shares",217
+"+ liquidity >= Rs 3 cr & 50,000 shares",275
+"+ liquidity >= Rs 2 cr & 25,000 shares",350
+"+ liquidity >= Rs 1 cr & 10,000 shares",424
