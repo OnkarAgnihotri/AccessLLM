@@ -1,0 +1,88 @@
+mode,symbol,industry,pattern,signal_date,entry_date,entry_time,exit_date,days_held,entry,stop0,t1,t1_hit,exit,qty,invested,pnl,return_pct,r_multiple,exit_reason
+hourly,VENUSPIPES,Steel,P1 trend pullback,2023-11-21,2023-11-22,10:15,2023-11-28,3,1414.86,1373.98,1474.65,False,1372.61,70,99181.52,-3238.1,-3.26,-1.13,stop
+hourly,PENIND,Specialty Industrial Machinery,P2 breakout retest,2023-11-24,2023-11-28,13:15,2023-11-29,1,124.52,120.31,131.9,False,120.19,797,99387.28,-3738.58,-3.76,-1.11,stop
+hourly,AXISCADES,Engineering & Construction,P1 trend pullback,2023-11-29,2023-11-30,13:15,2023-12-05,3,554.15,534.69,608.4,False,534.16,177,98225.13,-3817.11,-3.89,-1.11,stop
+hourly,DCAL,Biotechnology,P1 trend pullback,2023-11-30,2023-12-01,12:15,2023-12-06,3,165.87,160.33,178.25,False,160.17,592,98332.57,-3648.11,-3.71,-1.11,stop
+hourly,NELCAST,Metal Fabrication,P1 trend pullback,2023-11-21,2023-11-22,14:15,2023-12-18,17,172.17,166.6,192.13,False,166.44,580,100001.82,-3608.9,-3.61,-1.12,stop
+hourly,ASHOKA,Engineering & Construction,P1 trend pullback,2023-11-29,2023-11-30,12:15,2023-12-20,14,137.84,132.19,151.65,True,137.7,713,98418.46,4541.85,4.61,1.13,breakeven
+hourly,SPAL,Apparel Manufacturing,P1 trend pullback,2023-12-01,2023-12-04,10:15,2023-12-20,12,621.62,593.36,664.15,False,592.76,50,31141.52,-1573.55,-5.05,-1.11,stop
+hourly,TEXINFRA,Real Estate Services,P1 trend pullback,2023-12-07,2023-12-08,14:15,2023-12-20,8,101.1,93.63,112.54,True,101.0,653,66120.87,3441.42,5.2,0.71,breakeven
+hourly,CONFIPET,Oil & Gas Refining & Marketing,P1 trend pullback,2023-12-11,2023-12-12,11:15,2023-12-20,6,95.5,89.93,104.44,False,89.84,891,85210.93,-5289.19,-6.21,-1.07,stop
+hourly,SHRIRAMPPS,Real Estate - Development,P1 trend pullback,2023-12-12,2023-12-13,12:15,2023-12-20,5,119.87,115.22,129.0,False,115.11,766,91952.75,-3910.24,-4.25,-1.1,stop
+hourly,JINDRILL,Oil & Gas Equipment & Services,P1 trend pullback,2023-12-18,2023-12-19,10:15,2023-12-20,1,799.8,738.75,911.29,False,738.01,81,64884.17,-5206.75,-8.02,-1.05,stop
+hourly,TALBROAUTO,Auto Parts,P1 trend pullback,2023-11-30,2023-12-01,13:15,2023-12-21,14,297.3,275.28,344.71,False,275.01,223,66399.47,-5176.07,-7.8,-1.05,stop
+hourly,ARIHANTCAP,Capital Markets,P1 trend pullback,2023-12-27,2023-12-28,11:15,2024-01-08,7,71.07,67.33,77.8,False,67.26,1243,88469.65,-4985.65,-5.64,-1.07,stop
+hourly,GAEL,Packaged Foods,P1 trend pullback,2023-12-28,2023-12-29,10:15,2024-01-09,7,183.38,176.05,203.78,False,175.88,499,91640.36,-4007.3,-4.37,-1.1,stop
+hourly,ORIENTHOT,Lodging,P1 trend pullback,2024-01-08,2024-01-09,11:15,2024-01-16,5,126.08,120.82,133.66,False,120.7,660,83332.43,-3793.86,-4.55,-1.09,stop
+hourly,BHARATWIRE,Steel,P1 trend pullback,2023-12-18,2023-12-19,11:15,2024-01-16,20,312.21,291.96,343.45,True,390.66,101,31594.41,5384.2,17.04,2.63,time (20 days)
+hourly,RATNAMANI,Steel,P1 trend pullback,2023-12-21,2023-12-22,13:15,2024-01-18,18,3415.86,3239.08,3882.98,False,3235.85,26,88941.37,-4936.09,-5.55,-1.07,stop
+hourly,INOXGREEN,Utilities - Renewable,P1 trend pullback,2024-01-11,2024-01-12,15:15,2024-01-18,4,134.13,124.11,149.65,False,123.99,475,63812.83,-5018.06,-7.86,-1.05,stop
+hourly,MONARCH,Capital Markets,P1 trend pullback,2023-12-22,2023-12-26,11:15,2024-01-23,20,224.65,209.51,254.1,True,263.2,309,69522.62,10241.98,14.73,2.19,time (20 days)
+hourly,WEBELSOLAR,Solar,P1 trend pullback,2023-12-27,2023-12-28,10:15,2024-01-25,20,25.3,23.79,28.71,True,32.72,3085,78152.08,16419.19,21.01,3.53,time (20 days)
+hourly,TEXINFRA,Real Estate Services,P1 trend pullback,2023-12-28,2023-12-29,11:15,2024-01-29,20,105.46,99.95,117.07,True,116.95,193,20400.63,2599.99,12.74,2.45,time (20 days)
+hourly,RAMKY,Engineering & Construction,P1 trend pullback,2024-01-17,2024-01-18,11:15,2024-02-02,9,762.86,721.75,826.42,True,863.71,114,87093.04,9065.18,10.41,1.93,trail stop
+hourly,GREENPLY,Lumber & Wood Production,P1 trend pullback,2024-01-24,2024-01-25,14:15,2024-02-09,10,237.09,224.57,266.06,False,224.34,55,13078.85,-792.33,-6.06,-1.15,stop
+hourly,SAKAR,Drug Manufacturers - Specialty & Generic,P1 trend pullback,2024-02-02,2024-02-05,13:15,2024-02-09,4,424.57,410.1,479.0,False,409.69,117,49757.7,-1913.6,-3.85,-1.13,stop
+hourly,SANGAMIND,Textile Manufacturing,P1 trend pullback,2024-01-18,2024-01-19,11:15,2024-02-12,14,435.89,408.91,483.16,True,480.35,174,75957.64,7701.24,10.14,1.64,trail stop
+hourly,EMIL,Specialty Retail,P1 trend pullback,2024-01-24,2024-01-25,11:15,2024-02-12,11,217.07,202.78,239.9,True,216.85,343,74565.85,3594.99,4.82,0.73,breakeven
+hourly,SHRIRAMPPS,Real Estate - Development,P1 trend pullback,2024-01-29,2024-01-30,11:15,2024-02-12,9,128.48,122.08,138.5,True,128.35,794,102156.42,3594.14,3.52,0.71,breakeven
+hourly,AURIONPRO,Software - Application,P1 trend pullback,2024-01-29,2024-01-30,12:15,2024-02-12,9,1101.1,1046.52,1213.39,False,1045.48,44,48529.47,-2615.72,-5.39,-1.09,stop
+hourly,KPIGREEN,Utilities - Renewable,P1 trend pullback,2024-01-18,2024-01-19,14:15,2024-02-13,15,315.98,299.17,341.53,True,426.62,279,88287.24,18722.72,21.21,3.99,breakeven (gap)
+hourly,DREDGECORP,Engineering & Construction,P1 trend pullback,2024-01-30,2024-01-31,13:15,2024-02-13,9,790.79,734.8,889.95,False,710.39,47,37234.82,-3920.67,-10.53,-1.49,stop (gap)
+hourly,LOKESHMACH,Specialty Industrial Machinery,P1 trend pullback,2024-01-18,2024-01-19,14:15,2024-02-19,20,364.51,335.55,413.4,False,354.74,162,59144.94,-1775.35,-3.0,-0.38,time (20 days)
+hourly,PAISALO,Credit Services,P1 trend pullback,2024-01-19,2024-01-23,14:15,2024-02-20,20,50.55,47.58,56.19,True,78.67,1337,67689.79,22304.52,32.95,5.61,time (20 days)
+hourly,RAMCOIND,Building Products & Equipment,P1 trend pullback,2024-02-19,2024-02-20,11:15,2024-02-21,1,242.29,229.31,271.75,False,229.08,251,60911.05,-3510.1,-5.76,-1.08,stop
+hourly,NFL,Agricultural Inputs,P1 trend pullback,2024-02-16,2024-02-19,10:15,2024-02-27,6,107.51,95.86,126.25,False,95.76,457,49212.76,-5535.66,-11.25,-1.04,stop
+hourly,TFCILTD,Credit Services,P1 trend pullback,2024-02-13,2024-02-14,10:15,2024-03-05,14,38.08,33.58,47.98,True,42.93,1172,44704.0,8633.17,19.31,1.64,trail stop
+hourly,SANGAMIND,Textile Manufacturing,P1 trend pullback,2024-02-14,2024-02-15,10:15,2024-03-06,14,519.12,456.54,621.47,False,456.08,84,43681.29,-5449.41,-12.48,-1.04,stop
+hourly,RATEGAIN,Software - Application,P1 trend pullback,2024-02-21,2024-02-22,15:15,2024-03-06,9,810.61,761.29,921.7,False,760.53,45,36544.31,-2395.31,-6.55,-1.08,stop
+hourly,HUBTOWN,Real Estate - Development,P1 trend pullback,2024-03-06,2024-03-07,10:15,2024-03-11,1,140.14,132.6,172.0,False,132.47,742,104130.83,-5981.4,-5.74,-1.07,stop
+hourly,HPL,Electrical Equipment & Parts,P1 trend pullback,2024-03-06,2024-03-07,12:15,2024-03-12,2,334.23,313.24,393.87,False,312.51,266,89035.28,-6032.38,-6.78,-1.08,stop (gap)
+hourly,ASHOKA,Engineering & Construction,P1 trend pullback,2024-02-13,2024-02-14,10:15,2024-03-12,18,170.72,155.54,195.5,False,155.39,347,59333.9,-5509.29,-9.29,-1.05,stop
+hourly,DYNAMATECH,Auto Parts,P2 breakout retest,2024-02-16,2024-02-19,11:15,2024-03-12,15,6972.27,6534.54,7757.34,True,6965.29,11,76809.49,3606.4,4.7,0.75,breakeven
+hourly,WINDLAS,Drug Manufacturers - Specialty & Generic,P1 trend pullback,2024-02-28,2024-02-29,12:15,2024-03-12,7,509.01,477.46,571.92,True,508.5,178,90734.59,5243.93,5.78,0.93,breakeven
+hourly,JAIBALAJI,Steel,P1 trend pullback,2024-02-14,2024-02-15,10:15,2024-03-13,18,191.19,173.05,227.0,True,217.98,290,55534.76,8841.68,15.92,1.68,breakeven (gap)
+hourly,ITDC,Lodging,P1 trend pullback,2024-02-14,2024-02-15,14:15,2024-03-13,18,702.15,617.2,867.55,False,616.58,62,43608.63,-5459.68,-12.52,-1.04,stop
+hourly,ARVINDFASN,Apparel Retail,P1 trend pullback,2024-02-21,2024-02-22,14:15,2024-03-13,13,459.11,433.89,499.11,False,433.46,221,101606.97,-5951.13,-5.86,-1.07,stop
+hourly,KPIGREEN,Utilities - Renewable,P1 trend pullback,2024-02-13,2024-02-14,10:15,2024-03-13,20,445.28,396.54,534.98,True,514.34,108,48170.69,8354.39,17.34,1.59,time (20 days)
+hourly,IFBIND,"Furnishings, Fixtures & Appliances",P1 trend pullback,2024-03-11,2024-03-12,12:15,2024-03-14,2,1379.03,1335.81,1495.0,False,1331.87,78,107715.35,-3976.93,-3.69,-1.18,stop (gap)
+hourly,JAIBALAJI,Steel,P1 trend pullback,2024-03-13,2024-03-14,11:15,2024-03-19,3,220.02,197.32,262.8,False,190.66,229,50467.9,-6891.73,-13.66,-1.33,stop (gap)
+hourly,IFBIND,"Furnishings, Fixtures & Appliances",P1 trend pullback,2024-03-13,2024-03-14,10:15,2024-03-20,4,1370.37,1289.23,1495.0,False,1287.94,64,87831.25,-5527.85,-6.29,-1.06,stop
+hourly,EMUDHRA,Software - Application,P1 trend pullback,2024-04-04,2024-04-05,11:15,2024-04-12,4,708.71,657.4,828.62,True,708.0,109,77364.41,6155.38,7.96,1.1,breakeven
+hourly,IFBIND,"Furnishings, Fixtures & Appliances",P1 trend pullback,2024-03-20,2024-03-21,15:15,2024-04-15,14,1320.72,1266.52,1495.0,True,1349.13,75,99195.06,7197.44,7.26,1.77,trail stop
+hourly,SOTL,Specialty Chemicals,P1 trend pullback,2024-03-13,2024-03-14,10:15,2024-04-15,20,409.21,374.6,473.41,True,477.33,150,61477.73,9674.92,15.74,1.86,time (20 days)
+hourly,GENESYS,Software - Application,P1 trend pullback,2024-03-13,2024-03-14,12:15,2024-04-15,20,557.06,504.29,666.1,True,640.61,98,54679.89,9203.42,16.83,1.78,time (20 days)
+hourly,AHLUCONT,Engineering & Construction,P1 trend pullback,2024-03-14,2024-03-15,15:15,2024-04-16,20,1069.07,981.06,1273.18,False,1068.32,59,63173.43,-247.17,-0.39,-0.05,time (20 days)
+hourly,DYNAMATECH,Auto Parts,P1 trend pullback,2024-03-15,2024-03-18,14:15,2024-04-18,20,6760.35,6177.89,7762.86,True,8263.41,8,54170.58,9789.02,18.07,2.1,time (20 days)
+hourly,PAISALO,Credit Services,P1 trend pullback,2024-03-15,2024-03-18,14:15,2024-04-18,20,67.82,51.04,99.09,False,77.65,306,20800.45,2896.18,13.92,0.56,time (20 days)
+hourly,GENESYS,Software - Application,P1 trend pullback,2024-04-15,2024-04-16,15:15,2024-04-19,2,657.21,609.03,738.9,False,596.45,116,76349.99,-7272.68,-9.53,-1.3,stop (gap)
+hourly,NDRAUTO,Auto Parts,P1 trend pullback,2024-03-18,2024-03-19,12:15,2024-04-19,20,400.4,366.05,488.06,False,402.62,148,59353.09,133.13,0.22,0.03,time (20 days)
+hourly,KIRLOSBROS,Specialty Industrial Machinery,P1 trend pullback,2024-03-20,2024-03-21,14:15,2024-04-23,20,1036.99,950.66,1167.76,True,1255.51,57,59201.91,9754.56,16.48,1.98,time (20 days)
+hourly,GENESYS,Software - Application,P1 trend pullback,2024-04-19,2024-04-22,10:15,2024-05-03,8,639.94,579.99,738.9,False,579.41,92,58967.85,-5756.55,-9.76,-1.04,stop
+hourly,SHILPAMED,Drug Manufacturers - Specialty & Generic,P1 trend pullback,2024-04-25,2024-04-26,10:15,2024-05-03,4,266.52,260.11,278.34,True,266.25,420,112093.21,2098.78,1.87,0.78,breakeven
+hourly,RICOAUTO,Auto Parts,P1 trend pullback,2024-04-22,2024-04-23,12:15,2024-05-07,9,134.23,125.27,154.75,False,125.14,620,83347.47,-5880.45,-7.06,-1.06,stop
+hourly,INDOSTAR,Credit Services,P1 trend pullback,2024-04-30,2024-05-02,12:15,2024-05-07,3,247.25,235.91,280.0,False,235.67,449,111169.19,-5500.39,-4.95,-1.08,stop
+hourly,ANUP,Specialty Industrial Machinery,P1 trend pullback,2024-04-29,2024-04-30,12:15,2024-05-10,7,1783.83,1708.93,1960.63,True,1782.05,62,110752.38,5722.85,5.17,1.23,breakeven
+hourly,PREMEXPLN,Specialty Chemicals,P1 trend pullback,2024-05-07,2024-05-08,15:15,2024-05-10,2,467.27,429.67,554.6,False,429.24,146,68325.48,-5760.42,-8.43,-1.05,stop
+hourly,EMUDHRA,Software - Application,P1 trend pullback,2024-04-15,2024-04-16,13:15,2024-05-15,20,722.72,662.16,839.01,False,748.44,92,66592.9,2152.76,3.23,0.39,time (20 days)
+hourly,AURIONPRO,Software - Application,P1 trend pullback,2024-05-09,2024-05-10,10:15,2024-05-21,6,1223.72,1143.96,1384.79,False,1142.82,68,83335.44,-5743.69,-6.89,-1.06,stop
+hourly,SHILPAMED,Drug Manufacturers - Specialty & Generic,P1 trend pullback,2024-05-10,2024-05-13,11:15,2024-05-22,6,252.23,241.44,280.28,False,241.19,427,107852.28,-5008.65,-4.64,-1.09,stop
+hourly,CENTUM,Electronic Components,P1 trend pullback,2024-05-15,2024-05-16,11:15,2024-05-23,4,1854.35,1749.46,2086.7,False,1668.53,36,66859.48,-6894.06,-10.31,-1.83,stop (gap)
+hourly,ANUP,Specialty Industrial Machinery,P1 trend pullback,2024-05-16,2024-05-17,10:15,2024-05-24,4,1877.73,1722.39,2132.98,False,1687.12,28,52662.29,-5511.36,-10.47,-1.27,stop (gap)
+hourly,TALBROAUTO,Auto Parts,P1 trend pullback,2024-05-09,2024-05-10,12:15,2024-05-27,10,290.79,275.02,322.87,True,290.5,344,100174.19,5136.47,5.13,0.95,breakeven
+hourly,ORIENTHOT,Lodging,P1 trend pullback,2024-05-22,2024-05-23,13:15,2024-05-27,2,142.44,136.06,153.04,False,135.93,774,110404.72,-5346.25,-4.84,-1.08,stop
+hourly,AMRUTANJAN,Drug Manufacturers - Specialty & Generic,P2 breakout retest,2024-05-29,2024-05-30,10:15,2024-06-03,2,702.55,671.55,789.09,False,670.87,153,107641.54,-5143.69,-4.78,-1.08,stop
+hourly,PITTIENG,Metal Fabrication,P1 trend pullback,2024-05-09,2024-05-10,13:15,2024-06-04,16,833.98,787.3,904.19,True,833.15,116,96880.41,3701.84,3.82,0.68,breakeven
+hourly,RAYMOND,Specialty Industrial Machinery,P1 trend pullback,2024-05-09,2024-05-10,13:15,2024-06-04,16,2145.99,2026.32,2323.84,False,2024.29,34,73073.95,-4358.77,-5.96,-1.07,stop
+hourly,GOKULAGRO,Packaged Foods,P1 trend pullback,2024-05-23,2024-05-24,12:15,2024-06-04,7,71.0,68.03,82.88,False,67.96,1515,107710.02,-4891.97,-4.54,-1.09,stop
+hourly,KIRLOSBROS,Specialty Industrial Machinery,P1 trend pullback,2024-05-28,2024-05-29,11:15,2024-06-04,4,1686.48,1543.85,1905.82,False,1542.31,37,62497.56,-5530.84,-8.85,-1.05,stop
+hourly,EXCELINDUS,Specialty Chemicals,P1 trend pullback,2024-05-29,2024-05-30,14:15,2024-06-04,3,1005.1,946.38,1102.38,False,945.43,92,92602.86,-5752.92,-6.21,-1.06,stop
+hourly,SANSERA,Auto Parts,P1 trend pullback,2024-05-30,2024-05-31,10:15,2024-06-04,2,1036.69,995.63,1108.18,False,994.63,17,17668.16,-816.51,-4.62,-1.17,stop
+hourly,PREMEXPLN,Specialty Chemicals,P1 trend pullback,2024-05-10,2024-05-13,12:15,2024-06-10,20,452.45,416.85,554.6,True,596.79,25,11348.32,2971.12,26.18,3.34,time (20 days)
+hourly,DSSL,Information Technology Services,P1 trend pullback,2024-06-10,2024-06-11,14:15,2024-06-18,4,1186.18,1137.65,1432.14,False,1136.51,85,100968.93,-4505.06,-4.46,-1.09,stop
+hourly,HERITGFOOD,Packaged Foods,P1 trend pullback,2024-06-14,2024-06-18,13:15,2024-06-20,2,599.5,552.86,714.87,False,552.31,111,66646.92,-5443.43,-8.17,-1.05,stop
+hourly,DREDGECORP,Engineering & Construction,P1 trend pullback,2024-06-06,2024-06-07,13:15,2024-06-28,15,877.88,831.13,1048.4,True,1101.45,105,92310.03,20387.45,22.09,4.15,end of test
+hourly,SUBROS,Auto Parts,P1 trend pullback,2024-06-07,2024-06-10,11:15,2024-06-28,14,616.72,578.19,678.94,True,640.7,128,79056.9,5233.53,6.62,1.06,end of test
+hourly,SUDARSCHEM,Specialty Chemicals,P1 trend pullback,2024-06-10,2024-06-11,15:15,2024-06-28,13,808.36,759.48,885.58,True,892.52,103,83383.19,8018.35,9.62,1.59,end of test
+hourly,AHLUCONT,Engineering & Construction,P1 trend pullback,2024-06-11,2024-06-12,15:15,2024-06-28,12,1195.29,1153.47,1385.88,False,1242.66,85,101744.12,3732.7,3.67,1.05,end of test
+hourly,HERITGFOOD,Packaged Foods,P1 trend pullback,2024-06-24,2024-06-25,12:15,2024-06-28,4,584.48,531.78,714.87,False,550.97,99,57956.15,-3506.22,-6.05,-0.67,end of test
