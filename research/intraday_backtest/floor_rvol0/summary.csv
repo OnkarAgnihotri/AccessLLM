@@ -1,0 +1,7 @@
+view,trades,win_pct,t1_hit_pct,avg_gross_R,avg_net_R,avg_cost_R,profit_factor,net_pnl_rs,costs_rs
+"every signal (Pine, one chart per stock)",150,36.0,34.0,-0.09,-0.328,0.238,0.58,-122968,89112
+desk portfolio (limits + breaker),135,35.6,34.1,-0.088,-0.324,0.236,0.58,-109332,79787
+every signal: setup A LONG,42,42.9,42.9,0.105,-0.122,0.227,0.83,-12809,23797
+every signal: setup A SHORT,26,26.9,23.1,-0.272,-0.53,0.258,0.37,-34423,16738
+every signal: setup B LONG,35,28.6,28.6,-0.284,-0.515,0.231,0.4,-45030,20193
+every signal: setup B SHORT,47,40.4,36.2,-0.02,-0.261,0.242,0.64,-30705,28384

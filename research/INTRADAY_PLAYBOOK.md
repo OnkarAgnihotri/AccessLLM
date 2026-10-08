@@ -4,6 +4,27 @@
 
 ---
 
+> **⚠️ BACKTEST RESULT (8 Oct 2026): not profitable.**
+> These rules were ported to Python (`research/scripts/intraday_backtest.py`) and run on 5-minute data:
+> 158 liquid stocks, 16 Jul – 7 Oct 2026 (58 days, of which about 48 had enough history for RVol), ₹5 lakh, 0.5% risk, full MIS costs plus 0.03% slippage per side.
+>
+> | Variant | Trades | Win % | Gross R/trade | Net R/trade | Result |
+> |---|---|---|---|---|---|
+> | Playbook as written | 46 | 37% | −0.01 | −0.52 | **−11.9%** |
+> | + minimum stop (1 × ATR5m and 0.4%) | 27 | 48% | +0.09 | −0.12 | −1.6% |
+> | + minimum stop, ₹0 brokerage, 0.02% slippage | 27 | 48% | +0.09 | −0.06 | −0.7% |
+> | ORB stop at the far side of the opening range | 11 | 36% | −0.07 | −0.27 | −1.5% |
+> | Minimum stop, no RS/index filters | 52 | 40% | −0.11 | −0.32 | −8.2% |
+> | Minimum stop, no RVol filter | 135 | 36% | −0.09 | −0.32 | −21.9% |
+> | Minimum stop, no filters at all | 233 | 36% | −0.06 | −0.29 | −33.5% |
+>
+> Three findings:
+> 1. **The playbook stop rule is too tight.** The median stop was 0.25% of price, which forces positions of ₹10–15 lakh and costs of about 0.4R per trade. A minimum stop distance is required.
+> 2. **The filters help but are not enough.** Every filter removed made results worse. With all filters the gross edge is only about +0.09R, against 0.14–0.20R of costs.
+> 3. **Even the best variant lost money.** It also had only 27 trades, too few to trust either way.
+>
+> **Do not trade this live.** A real verdict needs years of 5-minute data (Dhan/Kite export).
+
 ## 0. Read this first: what our own data already says
 
 Before any capital goes on this, three facts from earlier tests on this repo's 597-stock universe have to shape the rules:
